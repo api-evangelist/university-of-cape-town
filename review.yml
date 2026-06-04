@@ -1,0 +1,44 @@
+---
+name: University of Cape Town
+description: University of Cape Town public developer/API footprint review for APIs.json cataloging.
+url: https://raw.githubusercontent.com/api-evangelist/university-of-cape-town/refs/heads/main/review.yml
+created: '2026-06-03'
+modified: '2026-06-03'
+reviews:
+  - date: '2026-06-03'
+    rating: 2
+    summary: >-
+      UCT has no single consolidated developer portal, but three real public
+      machine-readable interfaces were verified live: the DataFirst NADA
+      microdata catalog REST API returned valid JSON listing 573 surveys; the
+      OpenUCT DSpace institutional repository served a valid OAI-PMH 2.0 Identify
+      response (base URL https://open.uct.ac.za/server/oai/request); and the
+      ZivaHub open data repository is built on Figshare for Institutions and is
+      reachable through the public Figshare API. Most operational/SIS/identity
+      systems are gated. No endpoints were fabricated; every URL below was
+      probed during the review.
+    endpoints:
+      - url: https://www.uct.ac.za/
+        status: 200
+        note: Official institution website.
+      - url: https://www.datafirst.uct.ac.za/dataportal/index.php/api/catalog
+        status: 200
+        note: NADA REST API; returned JSON with 573 surveys.
+      - url: https://www.datafirst.uct.ac.za/dataportal/index.php/catalog
+        status: 200
+        note: DataFirst NADA human-facing data catalog.
+      - url: https://open.uct.ac.za/server/oai/request?verb=Identify
+        status: 200
+        note: OpenUCT DSpace OAI-PMH 2.0 Identify response (repository name OpenUCT).
+      - url: https://open.uct.ac.za/
+        status: 200
+        note: OpenUCT institutional repository home.
+      - url: https://zivahub.uct.ac.za/
+        status: 202
+        note: ZivaHub open data (Figshare for Institutions); 202 from edge/CDN.
+      - url: https://api.figshare.com/v2/articles?page_size=1
+        status: 200
+        note: Public Figshare API backing ZivaHub content.
+      - url: https://lib.uct.ac.za/digitalservices/documentation
+        status: 200
+        note: UCT Libraries digital services documentation (terms/policies, not an API spec).

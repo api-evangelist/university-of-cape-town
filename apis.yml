@@ -1,0 +1,101 @@
+---
+aid: university-of-cape-town
+name: University of Cape Town
+description: >-
+  The University of Cape Town (UCT) is South Africa's leading public research
+  university, ranked #96 in the QS World University Rankings 2025 and the
+  highest-ranked university on the African continent. UCT does not operate a
+  single consolidated developer portal, but several of its research and library
+  units expose public, machine-readable interfaces. DataFirst runs a NADA-based
+  microdata catalog with a public REST API, the OpenUCT institutional repository
+  exposes a DSpace OAI-PMH metadata harvesting endpoint, and the ZivaHub open
+  data repository is built on Figshare for Institutions and is reachable through
+  the public Figshare API. Most operational, student-information, and identity
+  systems remain gated behind institutional authentication.
+type: Index
+position: Consumer
+access: 3rd-Party
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/university-of-cape-town/refs/heads/main/apis.yml
+tags:
+  - Education
+  - Higher Education
+  - University
+  - Research Data
+  - Open Data
+  - Institutional Repository
+  - OAI-PMH
+  - South Africa
+  - Africa
+created: '2026-06-03'
+modified: '2026-06-03'
+specificationVersion: '0.19'
+apis:
+  - aid: university-of-cape-town:datafirst-nada
+    name: DataFirst Microdata Catalog API (NADA)
+    description: >-
+      DataFirst is a UCT research unit and data service providing online access
+      to survey and administrative microdata from South Africa and other African
+      countries. Its open data portal is built on the NADA (National Data
+      Archive) cataloging tool, which exposes a public REST/JSON API for
+      browsing the catalog of studies. The catalog endpoint returns survey
+      metadata (hundreds of confirmed surveys) in JSON.
+    humanURL: https://www.datafirst.uct.ac.za/dataportal/index.php/catalog
+    baseURL: https://www.datafirst.uct.ac.za/dataportal/index.php/api
+    tags: [ Microdata, Open Data, Research Data, NADA, Catalog, Surveys ]
+    properties:
+      - type: Documentation
+        url: https://www.datafirst.uct.ac.za/dataportal/index.php/catalog
+      - type: Website
+        url: https://www.datafirst.uct.ac.za/
+  - aid: university-of-cape-town:openuct-oai-pmh
+    name: OpenUCT Institutional Repository OAI-PMH
+    description: >-
+      OpenUCT is the University of Cape Town's open access institutional
+      repository, launched in 2014 and built on DSpace. It preserves and openly
+      shares UCT scholarly outputs including theses, dissertations, journal
+      articles, reports, and open educational resources. The repository exposes
+      a standards-compliant OAI-PMH 2.0 metadata harvesting interface supporting
+      verbs such as Identify, ListRecords, and ListMetadataFormats.
+    humanURL: https://open.uct.ac.za/
+    baseURL: https://open.uct.ac.za/server/oai/request
+    tags: [ Institutional Repository, OAI-PMH, DSpace, Metadata, Open Access, Scholarly ]
+    properties:
+      - type: Documentation
+        url: https://open.uct.ac.za/
+      - type: Authentication
+        url: https://open.uct.ac.za/server/oai/request?verb=Identify
+  - aid: university-of-cape-town:zivahub-figshare
+    name: ZivaHub Open Data (Figshare API)
+    description: >-
+      ZivaHub is UCT's institutional open data repository for research data and
+      scholarly outputs, powered by Figshare for Institutions and certified with
+      the CoreTrustSeal in 2025. Public ZivaHub content is accessible
+      programmatically through the public Figshare REST API, which provides
+      article, collection, and project metadata in JSON.
+    humanURL: https://zivahub.uct.ac.za/
+    baseURL: https://api.figshare.com/v2
+    tags: [ Open Data, Research Data, Figshare, Repository, Metadata ]
+    properties:
+      - type: Documentation
+        url: https://docs.figshare.com/
+      - type: Website
+        url: https://zivahub.uct.ac.za/
+common:
+  - type: Website
+    url: https://www.uct.ac.za/
+  - type: GitHub
+    url: https://github.com/uct-cbio
+  - type: LinkedIn
+    url: https://za.linkedin.com/school/university-of-cape-town/
+  - type: Plans
+    url: plans/university-of-cape-town-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/university-of-cape-town-rate-limits.yml
+  - type: FinOps
+    url: finops/university-of-cape-town-finops.yml
+  - type: Review
+    url: review.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
