@@ -1,0 +1,105 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/university-of-cape-town/main/json-schema/university-of-cape-town-article-schema.json",
+  "title": "ZivaHub Article",
+  "description": "A public research output (article/dataset) in UCT's ZivaHub repository, as returned by the public Figshare API v2.",
+  "type": "object",
+  "required": ["id", "title", "doi", "url", "defined_type_name"],
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Unique identifier for the article."
+    },
+    "title": {
+      "type": "string",
+      "description": "Title of the article."
+    },
+    "doi": {
+      "type": "string",
+      "description": "DOI of the article."
+    },
+    "handle": {
+      "type": "string",
+      "description": "Handle of the article."
+    },
+    "url": {
+      "type": "string",
+      "format": "uri",
+      "description": "API endpoint for the article."
+    },
+    "published_date": {
+      "type": "string",
+      "description": "Date the article was published."
+    },
+    "thumb": {
+      "type": "string",
+      "format": "uri",
+      "description": "Thumbnail image URL."
+    },
+    "defined_type": {
+      "type": "integer",
+      "description": "Numeric item type identifier."
+    },
+    "defined_type_name": {
+      "type": "string",
+      "description": "Human-readable item type (e.g. dataset, thesis, software)."
+    },
+    "group_id": {
+      "type": "integer"
+    },
+    "url_public_api": {
+      "type": "string",
+      "format": "uri"
+    },
+    "url_public_html": {
+      "type": "string",
+      "format": "uri"
+    },
+    "resource_title": {
+      "type": "string"
+    },
+    "resource_doi": {
+      "type": "string"
+    },
+    "created_date": {
+      "type": "string"
+    },
+    "modified_date": {
+      "type": "string"
+    },
+    "timeline": {
+      "type": "object",
+      "description": "Publishing timeline for the article.",
+      "properties": {
+        "posted": { "type": "string" },
+        "firstOnline": { "type": "string" },
+        "revision": { "type": "string" }
+      }
+    },
+    "authors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer" },
+          "full_name": { "type": "string" },
+          "orcid_id": { "type": "string" }
+        }
+      }
+    },
+    "files": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer" },
+          "name": { "type": "string" },
+          "size": { "type": "integer" },
+          "download_url": { "type": "string", "format": "uri" },
+          "computed_md5": { "type": "string" },
+          "mimetype": { "type": "string" }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,55 @@
+vocabulary:
+  name: University of Cape Town API Vocabulary
+  description: >-
+    Shared terms used across the University of Cape Town public research-data
+    APIs: the DataFirst NADA microdata catalog, the OpenUCT DSpace OAI-PMH
+    repository, and the ZivaHub (Figshare) open data repository.
+  version: '1.0.0'
+  terms:
+    - term: Article
+      definition: >-
+        A public research output in ZivaHub (Figshare), such as a dataset,
+        thesis, software, figure, or report, identified by a numeric id and DOI.
+      tags: [zivahub, figshare, research-output]
+    - term: Collection
+      definition: A curated grouping of related ZivaHub articles, with its own DOI and handle.
+      tags: [zivahub, figshare]
+    - term: Project
+      definition: A ZivaHub container that organizes articles and collaborators.
+      tags: [zivahub, figshare]
+    - term: Study
+      definition: >-
+        A survey or administrative microdata dataset cataloged in the DataFirst
+        NADA portal, described by metadata including country and time coverage.
+      tags: [datafirst, nada, microdata, survey]
+    - term: DOI
+      definition: A Digital Object Identifier providing a persistent reference to a research output.
+      tags: [identifier, persistent]
+    - term: Handle
+      definition: A Handle System persistent identifier assigned to a repository item.
+      tags: [identifier, persistent]
+    - term: idno
+      definition: The persistent study identifier used by the DataFirst NADA catalog.
+      tags: [datafirst, nada, identifier]
+    - term: form_model
+      definition: >-
+        The access model for a DataFirst study (for example licensed or open),
+        governing how the underlying microdata may be obtained.
+      tags: [datafirst, access, licensing]
+    - term: OAI-PMH
+      definition: >-
+        The Open Archives Initiative Protocol for Metadata Harvesting, exposed
+        by OpenUCT for harvesting repository metadata via verbs such as
+        Identify, ListRecords, and ListMetadataFormats.
+      tags: [openuct, dspace, metadata-harvesting]
+    - term: defined_type_name
+      definition: >-
+        The human-readable item type of a ZivaHub article (for example dataset,
+        thesis, software, poster, report).
+      tags: [zivahub, figshare, classification]
+    - term: timeline
+      definition: The set of publishing dates (posted, first online, revision) for a repository item.
+      tags: [zivahub, figshare, dates]
+    - term: ORCID
+      definition: An Open Researcher and Contributor ID identifying an author.
+      tags: [author, identifier]

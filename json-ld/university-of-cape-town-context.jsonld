@@ -1,0 +1,61 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "uct": "https://www.uct.ac.za/ns/",
+    "@vocab": "https://www.uct.ac.za/ns/",
+    "name": "schema:name",
+    "url": "schema:url",
+    "description": "schema:description",
+    "institution": {
+      "@id": "schema:CollegeOrUniversity",
+      "@type": "@id"
+    },
+    "Article": "schema:Dataset",
+    "Study": "schema:Dataset",
+    "Collection": "schema:Collection",
+    "Project": "schema:Project",
+    "id": "schema:identifier",
+    "title": "schema:name",
+    "doi": {
+      "@id": "schema:identifier",
+      "@type": "schema:PropertyValue"
+    },
+    "handle": "schema:identifier",
+    "published_date": {
+      "@id": "schema:datePublished",
+      "@type": "schema:Date"
+    },
+    "created_date": {
+      "@id": "schema:dateCreated",
+      "@type": "schema:Date"
+    },
+    "modified_date": {
+      "@id": "schema:dateModified",
+      "@type": "schema:Date"
+    },
+    "defined_type_name": "schema:additionalType",
+    "authors": "schema:author",
+    "full_name": "schema:name",
+    "orcid_id": "schema:identifier",
+    "files": "schema:distribution",
+    "download_url": {
+      "@id": "schema:contentUrl",
+      "@type": "@id"
+    },
+    "mimetype": "schema:encodingFormat",
+    "size": "schema:contentSize",
+    "nation": "schema:spatialCoverage",
+    "authoring_entity": "schema:creator",
+    "year_start": "schema:temporalCoverage",
+    "year_end": "schema:temporalCoverage",
+    "thumbnail": {
+      "@id": "schema:thumbnailUrl",
+      "@type": "@id"
+    }
+  },
+  "@type": "schema:CollegeOrUniversity",
+  "name": "University of Cape Town",
+  "url": "https://www.uct.ac.za/",
+  "description": "South Africa's leading public research university; publishes open research data and metadata through DataFirst (NADA), OpenUCT (DSpace OAI-PMH), and ZivaHub (Figshare)."
+}

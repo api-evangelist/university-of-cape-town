@@ -1,0 +1,49 @@
+{
+  "id": 32573085,
+  "title": "Example ZivaHub dataset",
+  "doi": "10.6084/m9.figshare.32573085.v1",
+  "handle": "",
+  "url": "https://api.figshare.com/v2/articles/32573085",
+  "published_date": "2026-06-04T02:59:32Z",
+  "thumb": "https://s3-eu-west-1.amazonaws.com/pfigshare-u-previews/65270877/thumb.png",
+  "defined_type": 3,
+  "defined_type_name": "dataset",
+  "group_id": 0,
+  "url_public_api": "https://api.figshare.com/v2/articles/32573085",
+  "url_public_html": "https://figshare.com/articles/dataset/Example_ZivaHub_dataset/32573085",
+  "timeline": {
+    "posted": "2026-06-04T02:59:32"
+  },
+  "resource_title": "",
+  "resource_doi": "",
+  "created_date": "2026-06-04T02:59:32Z",
+  "modified_date": "2026-06-04T02:59:32Z",
+  "figshare_url": "https://figshare.com/articles/dataset/Example_ZivaHub_dataset/32573085",
+  "download_disabled": false,
+  "description": "<p>An example research dataset deposited in UCT's ZivaHub open data repository.</p>",
+  "folder_structure": {},
+  "authors": [
+    {
+      "id": 24130866,
+      "full_name": "Jane Researcher",
+      "first_name": "Jane",
+      "last_name": "Researcher",
+      "is_active": true,
+      "url_name": "Jane_Researcher",
+      "orcid_id": "0000-0002-1825-0097"
+    }
+  ],
+  "custom_fields": [],
+  "files": [
+    {
+      "id": 65270877,
+      "name": "dataset.csv",
+      "size": 17091,
+      "is_link_only": false,
+      "download_url": "https://ndownloader.figshare.com/files/65270877",
+      "supplied_md5": "c058c04b8c3081d84f2c66899f77315e",
+      "computed_md5": "c058c04b8c3081d84f2c66899f77315e",
+      "mimetype": "text/csv"
+    }
+  ]
+}

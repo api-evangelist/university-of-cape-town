@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/university-of-cape-town/main/json-structure/university-of-cape-town-article-structure.json",
+  "name": "ZivaHubArticle",
+  "description": "JSON Structure for a public ZivaHub (Figshare) research output.",
+  "type": "object",
+  "properties": {
+    "id": { "type": "int64", "description": "Unique article identifier." },
+    "title": { "type": "string", "description": "Article title." },
+    "doi": { "type": "string", "description": "Article DOI." },
+    "handle": { "type": "string", "description": "Article handle." },
+    "url": { "type": "uri", "description": "API endpoint for the article." },
+    "published_date": { "type": "string", "description": "Publication date." },
+    "thumb": { "type": "uri", "description": "Thumbnail image URL." },
+    "defined_type": { "type": "int32", "description": "Numeric item type id." },
+    "defined_type_name": { "type": "string", "description": "Item type label." },
+    "url_public_html": { "type": "uri", "description": "Public HTML page." },
+    "created_date": { "type": "string", "description": "Creation date." },
+    "modified_date": { "type": "string", "description": "Last modified date." },
+    "timeline": {
+      "type": "object",
+      "description": "Publishing timeline.",
+      "properties": {
+        "posted": { "type": "string" },
+        "firstOnline": { "type": "string" },
+        "revision": { "type": "string" }
+      }
+    },
+    "authors": {
+      "type": "array",
+      "description": "List of authors.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "int64" },
+          "full_name": { "type": "string" },
+          "orcid_id": { "type": "string" }
+        }
+      }
+    },
+    "files": {
+      "type": "array",
+      "description": "Article files.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "int64" },
+          "name": { "type": "string" },
+          "size": { "type": "int64" },
+          "download_url": { "type": "uri" },
+          "computed_md5": { "type": "string" },
+          "mimetype": { "type": "string" }
+        }
+      }
+    }
+  },
+  "required": ["id", "title", "doi", "url", "defined_type_name"]
+}

@@ -1,0 +1,59 @@
+formats: [oas3]
+rules:
+  uct-info-contact:
+    description: API info object should include a contact.
+    severity: warn
+    given: $.info
+    then:
+      field: contact
+      function: truthy
+  uct-info-description:
+    description: API info object should include a description.
+    severity: warn
+    given: $.info
+    then:
+      field: description
+      function: truthy
+  uct-https-servers:
+    description: All servers must use HTTPS (UCT public APIs are HTTPS-only).
+    severity: error
+    given: $.servers[*].url
+    then:
+      function: pattern
+      functionOptions:
+        match: '^https://'
+  uct-operation-operationid:
+    description: Every operation must declare an operationId.
+    severity: error
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: operationId
+      function: truthy
+  uct-operation-summary:
+    description: Every operation should have a summary.
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: summary
+      function: truthy
+  uct-operation-tags:
+    description: Every operation should be tagged.
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: tags
+      function: truthy
+  uct-resource-has-id:
+    description: Catalog and repository objects expose a stable integer id.
+    severity: warn
+    given: $.components.schemas[?(@property.match(/Article$|Study$|Collection$|Project$/))].properties
+    then:
+      field: id
+      function: truthy
+  uct-doi-as-string:
+    description: DOI fields should be modeled as strings.
+    severity: warn
+    given: $.components.schemas[*].properties.doi
+    then:
+      field: type
+      function: defined

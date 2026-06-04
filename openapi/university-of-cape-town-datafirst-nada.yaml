@@ -1,0 +1,166 @@
+openapi: 3.0.3
+info:
+  title: DataFirst Microdata Catalog API (NADA)
+  description: >-
+    DataFirst is a University of Cape Town research unit and data service
+    providing online access to survey and administrative microdata from South
+    Africa and other African countries. Its open data portal is built on the
+    NADA (National Data Archive) cataloging tool, which exposes a public,
+    unauthenticated REST/JSON API for browsing the catalog of studies. This
+    OpenAPI description was reverse-engineered from confirmed live responses of
+    the public catalog endpoint (verified returning survey metadata in JSON).
+    Only paths and response fields actually observed in live responses are
+    documented here.
+  version: '1.0'
+  contact:
+    name: DataFirst
+    url: https://www.datafirst.uct.ac.za/
+servers:
+  - url: https://www.datafirst.uct.ac.za/dataportal/index.php/api
+    description: DataFirst NADA public catalog API
+tags:
+  - name: catalog
+    description: Browse and search the microdata catalog.
+paths:
+  /catalog:
+    get:
+      tags: [catalog]
+      summary: List catalog studies
+      description: >-
+        Returns a paginated list of catalog entries (surveys / studies) with
+        summary metadata. Confirmed to return hundreds of surveys in JSON.
+      operationId: listCatalog
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: A page of catalog studies.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CatalogResponse'
+  /catalog/search:
+    get:
+      tags: [catalog]
+      summary: Search catalog studies
+      description: >-
+        Search the catalog of studies. Confirmed to return the same structured
+        catalog response as the catalog listing endpoint.
+      operationId: searchCatalog
+      parameters:
+        - name: sk
+          in: query
+          description: Search keywords / free-text query.
+          schema:
+            type: string
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: A page of matching catalog studies.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CatalogResponse'
+components:
+  parameters:
+    limit:
+      name: limit
+      in: query
+      description: Maximum number of rows per page.
+      schema:
+        type: integer
+        minimum: 1
+        default: 15
+    offset:
+      name: offset
+      in: query
+      description: Number of rows to skip.
+      schema:
+        type: integer
+        minimum: 0
+        default: 0
+  schemas:
+    CatalogResponse:
+      type: object
+      properties:
+        result:
+          $ref: '#/components/schemas/CatalogResult'
+    CatalogResult:
+      type: object
+      properties:
+        found:
+          type: integer
+          description: Number of matching studies.
+          example: 573
+        total:
+          type: integer
+          description: Total number of studies in the catalog.
+          example: 573
+        limit:
+          type: integer
+          example: 15
+        offset:
+          type: integer
+          example: 0
+        search_counts_by_type:
+          type: object
+          description: Counts of results grouped by study type.
+          additionalProperties:
+            type: integer
+          example:
+            survey: 573
+        rows:
+          type: array
+          items:
+            $ref: '#/components/schemas/Study'
+    Study:
+      type: object
+      description: A single catalog study (survey).
+      properties:
+        id:
+          type: integer
+          description: Internal study identifier.
+          example: 890
+        type:
+          type: string
+          description: Study type.
+          example: survey
+        idno:
+          type: string
+          description: Persistent study identifier.
+          example: mwi-alpha-him-karonga-2002-2017-v1
+        doi:
+          type: string
+          nullable: true
+          description: DOI for the study, if assigned.
+        title:
+          type: string
+          example: ALPHA HIV Incidence and Mortality Data
+        subtitle:
+          type: string
+          example: Karonga 2002-2017
+        nation:
+          type: string
+          description: Country the study covers.
+          example: Malawi
+        authoring_entity:
+          type: string
+          description: Producing institution(s).
+        form_model:
+          type: string
+          description: Access model for the data.
+          example: licensed
+        data_class_id:
+          type: integer
+          nullable: true
+        year_start:
+          type: integer
+          example: 2002
+        year_end:
+          type: integer
+          example: 2017
+        thumbnail:
+          type: string
+          description: Thumbnail image path or URL.

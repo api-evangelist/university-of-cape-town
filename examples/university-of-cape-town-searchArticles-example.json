@@ -1,0 +1,28 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "https://api.figshare.com/v2/articles/search",
+    "body": {
+      "search_for": "malaria south africa",
+      "item_type": 3,
+      "order": "published_date",
+      "order_direction": "desc",
+      "page": 1,
+      "page_size": 2
+    }
+  },
+  "response": [
+    {
+      "id": 32573085,
+      "title": "Example ZivaHub dataset",
+      "doi": "10.6084/m9.figshare.32573085.v1",
+      "handle": "",
+      "url": "https://api.figshare.com/v2/articles/32573085",
+      "published_date": "2026-06-04T02:59:32Z",
+      "defined_type": 3,
+      "defined_type_name": "dataset",
+      "url_public_html": "https://figshare.com/articles/dataset/Example_ZivaHub_dataset/32573085",
+      "timeline": { "posted": "2026-06-04T02:59:32" }
+    }
+  ]
+}

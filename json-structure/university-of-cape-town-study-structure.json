@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/university-of-cape-town/main/json-structure/university-of-cape-town-study-structure.json",
+  "name": "DataFirstStudy",
+  "description": "JSON Structure for a DataFirst NADA catalog study.",
+  "type": "object",
+  "properties": {
+    "id": { "type": "int64", "description": "Internal study identifier." },
+    "type": { "type": "string", "description": "Study type." },
+    "idno": { "type": "string", "description": "Persistent study identifier." },
+    "doi": { "type": ["string", "null"], "description": "Study DOI, if assigned." },
+    "title": { "type": "string", "description": "Study title." },
+    "subtitle": { "type": "string", "description": "Study subtitle." },
+    "nation": { "type": "string", "description": "Country covered." },
+    "authoring_entity": { "type": "string", "description": "Producing institution(s)." },
+    "form_model": { "type": "string", "description": "Access model." },
+    "data_class_id": { "type": ["int32", "null"] },
+    "year_start": { "type": "int32", "description": "First year covered." },
+    "year_end": { "type": "int32", "description": "Last year covered." },
+    "thumbnail": { "type": "string", "description": "Thumbnail path or URL." }
+  },
+  "required": ["id", "type", "idno", "title"]
+}

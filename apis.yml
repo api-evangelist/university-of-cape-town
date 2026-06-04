@@ -96,6 +96,24 @@ common:
     url: finops/university-of-cape-town-finops.yml
   - type: Review
     url: review.yml
+  - type: OpenAPI
+    url: openapi/university-of-cape-town-zivahub-figshare.yaml
+  - type: OpenAPI
+    url: openapi/university-of-cape-town-datafirst-nada.yaml
+  - type: x-json-schema
+    url: json-schema/university-of-cape-town-article-schema.json
+  - type: x-json-schema
+    url: json-schema/university-of-cape-town-study-schema.json
+  - type: x-json-structure
+    url: json-structure/university-of-cape-town-article-structure.json
+  - type: x-json-structure
+    url: json-structure/university-of-cape-town-study-structure.json
+  - type: x-spectral-rules
+    url: rules/university-of-cape-town-rules.yml
+  - type: x-vocabulary
+    url: vocabulary/university-of-cape-town-vocabulary.yml
+  - type: x-json-ld
+    url: json-ld/university-of-cape-town-context.jsonld
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
