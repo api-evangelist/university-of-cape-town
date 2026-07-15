@@ -82,6 +82,8 @@ apis:
       - type: Website
         url: https://zivahub.uct.ac.za/
 common:
+  - type: AgenticAccess
+    url: agentic-access/university-of-cape-town-agentic-access.yml
   - type: DomainSecurity
     url: security/university-of-cape-town-domain-security.yml
   - type: Website
