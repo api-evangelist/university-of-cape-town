@@ -1,0 +1,133 @@
+openapi: 3.0.3
+info:
+  title: DataFirst Microdata Catalog API (NADA) articles collections API
+  description: DataFirst is a University of Cape Town research unit and data service providing online access to survey and administrative microdata from South Africa and other African countries. Its open data portal is built on the NADA (National Data Archive) cataloging tool, which exposes a public, unauthenticated REST/JSON API for browsing the catalog of studies. This OpenAPI description was reverse-engineered from confirmed live responses of the public catalog endpoint (verified returning survey metadata in JSON). Only paths and response fields actually observed in live responses are documented here.
+  version: '1.0'
+  contact:
+    name: DataFirst
+    url: https://www.datafirst.uct.ac.za/
+servers:
+- url: https://www.datafirst.uct.ac.za/dataportal/index.php/api
+  description: DataFirst NADA public catalog API
+tags:
+- name: collections
+  description: Public collections
+paths:
+  /collections:
+    get:
+      tags:
+      - collections
+      summary: List public collections
+      operationId: listCollections
+      parameters:
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/pageSize'
+      - name: institution
+        in: query
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: A list of public collections.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Collection'
+  /collections/{collection_id}:
+    get:
+      tags:
+      - collections
+      summary: Get a public collection
+      operationId: getCollection
+      parameters:
+      - name: collection_id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: The requested collection.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Collection'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  schemas:
+    Collection:
+      type: object
+      required:
+      - id
+      - title
+      - doi
+      - handle
+      - url
+      - timeline
+      properties:
+        id:
+          type: integer
+          example: 123
+        title:
+          type: string
+          example: Sample collection
+        doi:
+          type: string
+          example: 10.6084/m9.figshare.123
+        handle:
+          type: string
+        url:
+          type: string
+          format: uri
+          example: https://api.figshare.com/v2/collections/123
+        timeline:
+          $ref: '#/components/schemas/Timeline'
+    Timeline:
+      type: object
+      description: Publishing timeline for an item.
+      properties:
+        posted:
+          type: string
+          description: Date the item was posted.
+          example: '2026-06-04T02:59:32'
+        firstOnline:
+          type: string
+          description: Date the item first went online.
+        revision:
+          type: string
+          description: Date of the last revision.
+    ErrorMessage:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code.
+        message:
+          type: string
+          description: Human-readable error message.
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+  parameters:
+    pageSize:
+      name: page_size
+      in: query
+      description: Number of results per page.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 1000
+    page:
+      name: page
+      in: query
+      description: Page number for pagination.
+      schema:
+        type: integer
+        minimum: 1

@@ -1,0 +1,113 @@
+openapi: 3.0.3
+info:
+  title: DataFirst Microdata Catalog API (NADA) articles projects API
+  description: DataFirst is a University of Cape Town research unit and data service providing online access to survey and administrative microdata from South Africa and other African countries. Its open data portal is built on the NADA (National Data Archive) cataloging tool, which exposes a public, unauthenticated REST/JSON API for browsing the catalog of studies. This OpenAPI description was reverse-engineered from confirmed live responses of the public catalog endpoint (verified returning survey metadata in JSON). Only paths and response fields actually observed in live responses are documented here.
+  version: '1.0'
+  contact:
+    name: DataFirst
+    url: https://www.datafirst.uct.ac.za/
+servers:
+- url: https://www.datafirst.uct.ac.za/dataportal/index.php/api
+  description: DataFirst NADA public catalog API
+tags:
+- name: projects
+  description: Public projects
+paths:
+  /projects:
+    get:
+      tags:
+      - projects
+      summary: List public projects
+      operationId: listProjects
+      parameters:
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/pageSize'
+      responses:
+        '200':
+          description: A list of public projects.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Project'
+  /projects/{project_id}:
+    get:
+      tags:
+      - projects
+      summary: Get a public project
+      operationId: getProject
+      parameters:
+      - name: project_id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: The requested project.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  parameters:
+    page:
+      name: page
+      in: query
+      description: Page number for pagination.
+      schema:
+        type: integer
+        minimum: 1
+    pageSize:
+      name: page_size
+      in: query
+      description: Number of results per page.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 1000
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+  schemas:
+    ErrorMessage:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code.
+        message:
+          type: string
+          description: Human-readable error message.
+    Project:
+      type: object
+      required:
+      - id
+      - title
+      - url
+      - created_date
+      - modified_date
+      properties:
+        id:
+          type: integer
+          example: 1
+        title:
+          type: string
+          example: Sample project
+        url:
+          type: string
+          format: uri
+          example: https://api.figshare.com/v2/projects/1
+        created_date:
+          type: string
+          example: '2017-05-16T14:52:54Z'
+        modified_date:
+          type: string
+          example: '2017-05-16T14:52:54Z'
