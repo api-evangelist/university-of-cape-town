@@ -13,9 +13,21 @@ description: >-
   the public Figshare API. Most operational, student-information, and identity
   systems remain gated behind institutional authentication.
 type: Index
+accessModel:
+  pricing: free
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Free
+  confidence: medium
+  source:
+  - plans
+  generated: '2026-07-22'
+  method: derived
 position: Consumer
 access: 3rd-Party
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/university-of-cape-town.png
 url: https://raw.githubusercontent.com/api-evangelist/university-of-cape-town/refs/heads/main/apis.yml
 tags:
   - Education
@@ -31,56 +43,108 @@ created: '2026-06-03'
 modified: '2026-06-03'
 specificationVersion: '0.19'
 apis:
-  - aid: university-of-cape-town:datafirst-nada
-    name: DataFirst Microdata Catalog API (NADA)
-    description: >-
-      DataFirst is a UCT research unit and data service providing online access
-      to survey and administrative microdata from South Africa and other African
-      countries. Its open data portal is built on the NADA (National Data
-      Archive) cataloging tool, which exposes a public REST/JSON API for
-      browsing the catalog of studies. The catalog endpoint returns survey
-      metadata (hundreds of confirmed surveys) in JSON.
-    humanURL: https://www.datafirst.uct.ac.za/dataportal/index.php/catalog
-    baseURL: https://www.datafirst.uct.ac.za/dataportal/index.php/api
-    tags: [ Microdata, Open Data, Research Data, NADA, Catalog, Surveys ]
-    properties:
-      - type: Documentation
-        url: https://www.datafirst.uct.ac.za/dataportal/index.php/catalog
-      - type: Website
-        url: https://www.datafirst.uct.ac.za/
-  - aid: university-of-cape-town:openuct-oai-pmh
-    name: OpenUCT Institutional Repository OAI-PMH
-    description: >-
-      OpenUCT is the University of Cape Town's open access institutional
-      repository, launched in 2014 and built on DSpace. It preserves and openly
-      shares UCT scholarly outputs including theses, dissertations, journal
-      articles, reports, and open educational resources. The repository exposes
-      a standards-compliant OAI-PMH 2.0 metadata harvesting interface supporting
-      verbs such as Identify, ListRecords, and ListMetadataFormats.
-    humanURL: https://open.uct.ac.za/
-    baseURL: https://open.uct.ac.za/server/oai/request
-    tags: [ Institutional Repository, OAI-PMH, DSpace, Metadata, Open Access, Scholarly ]
-    properties:
-      - type: Documentation
-        url: https://open.uct.ac.za/
-      - type: Authentication
-        url: https://open.uct.ac.za/server/oai/request?verb=Identify
-  - aid: university-of-cape-town:zivahub-figshare
-    name: ZivaHub Open Data (Figshare API)
-    description: >-
-      ZivaHub is UCT's institutional open data repository for research data and
-      scholarly outputs, powered by Figshare for Institutions and certified with
-      the CoreTrustSeal in 2025. Public ZivaHub content is accessible
-      programmatically through the public Figshare REST API, which provides
-      article, collection, and project metadata in JSON.
-    humanURL: https://zivahub.uct.ac.za/
-    baseURL: https://api.figshare.com/v2
-    tags: [ Open Data, Research Data, Figshare, Repository, Metadata ]
-    properties:
-      - type: Documentation
-        url: https://docs.figshare.com/
-      - type: Website
-        url: https://zivahub.uct.ac.za/
+- aid: university-of-cape-town:datafirst-nada
+  name: DataFirst Microdata Catalog API (NADA)
+  description: >-
+    DataFirst is a UCT research unit and data service providing online access to survey and administrative
+    microdata from South Africa and other African countries. Its open data portal is built on the NADA
+    (National Data Archive) cataloging tool, which exposes a public REST/JSON API for browsing the catalog
+    of studies. The catalog endpoint returns survey metadata (hundreds of confirmed surveys) in JSON.
+  humanURL: https://www.datafirst.uct.ac.za/dataportal/index.php/catalog
+  baseURL: https://www.datafirst.uct.ac.za/dataportal/index.php/api
+  tags:
+  - Microdata
+  - Open Data
+  - Research Data
+  - NADA
+  - Catalog
+  - Surveys
+  properties:
+  - type: Documentation
+    url: https://www.datafirst.uct.ac.za/dataportal/index.php/catalog
+  - type: Website
+    url: https://www.datafirst.uct.ac.za/
+- aid: university-of-cape-town:openuct-oai-pmh
+  name: OpenUCT Institutional Repository OAI-PMH
+  description: >-
+    OpenUCT is the University of Cape Town's open access institutional repository, launched in 2014 and
+    built on DSpace. It preserves and openly shares UCT scholarly outputs including theses, dissertations,
+    journal articles, reports, and open educational resources. The repository exposes a standards-compliant
+    OAI-PMH 2.0 metadata harvesting interface supporting verbs such as Identify, ListRecords, and ListMetadataFormats.
+  humanURL: https://open.uct.ac.za/
+  baseURL: https://open.uct.ac.za/server/oai/request
+  tags:
+  - Institutional Repository
+  - OAI-PMH
+  - DSpace
+  - Metadata
+  - Open Access
+  - Scholarly
+  properties:
+  - type: Documentation
+    url: https://open.uct.ac.za/
+  - type: Authentication
+    url: https://open.uct.ac.za/server/oai/request?verb=Identify
+- aid: university-of-cape-town:zivahub-figshare
+  name: ZivaHub Open Data (Figshare API)
+  description: >-
+    ZivaHub is UCT's institutional open data repository for research data and scholarly outputs, powered
+    by Figshare for Institutions and certified with the CoreTrustSeal in 2025. Public ZivaHub content
+    is accessible programmatically through the public Figshare REST API, which provides article, collection,
+    and project metadata in JSON.
+  humanURL: https://zivahub.uct.ac.za/
+  baseURL: https://api.figshare.com/v2
+  tags:
+  - Open Data
+  - Research Data
+  - Figshare
+  - Repository
+  - Metadata
+  properties:
+  - type: Documentation
+    url: https://docs.figshare.com/
+  - type: Website
+    url: https://zivahub.uct.ac.za/
+- aid: university-of-cape-town:university-of-cape-town-articles-api
+  name: University of Cape Town articles API
+  description: Public articles (research outputs / datasets)
+  humanURL: https://www.datafirst.uct.ac.za/dataportal/index.php/catalog
+  baseURL: https://www.datafirst.uct.ac.za/dataportal/index.php/api
+  tags:
+  - articles
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-cape-town-articles-api-openapi.yml
+- aid: university-of-cape-town:university-of-cape-town-catalog-api
+  name: University of Cape Town catalog API
+  description: Browse and search the microdata catalog.
+  humanURL: https://www.datafirst.uct.ac.za/dataportal/index.php/catalog
+  baseURL: https://www.datafirst.uct.ac.za/dataportal/index.php/api
+  tags:
+  - catalog
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-cape-town-catalog-api-openapi.yml
+- aid: university-of-cape-town:university-of-cape-town-collections-api
+  name: University of Cape Town collections API
+  description: Public collections
+  humanURL: https://www.datafirst.uct.ac.za/dataportal/index.php/catalog
+  baseURL: https://www.datafirst.uct.ac.za/dataportal/index.php/api
+  tags:
+  - collections
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-cape-town-collections-api-openapi.yml
+- aid: university-of-cape-town:university-of-cape-town-projects-api
+  name: University of Cape Town projects API
+  description: Public projects
+  humanURL: https://www.datafirst.uct.ac.za/dataportal/index.php/catalog
+  baseURL: https://www.datafirst.uct.ac.za/dataportal/index.php/api
+  tags:
+  - projects
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-cape-town-projects-api-openapi.yml
 common:
   - type: AgenticAccess
     url: agentic-access/university-of-cape-town-agentic-access.yml
