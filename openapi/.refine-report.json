@@ -1,0 +1,20 @@
+{
+  "provider": "university-of-cape-town",
+  "sources": [
+    "university-of-cape-town-articles-api-openapi.yml",
+    "university-of-cape-town-catalog-api-openapi.yml",
+    "university-of-cape-town-collections-api-openapi.yml",
+    "university-of-cape-town-projects-api-openapi.yml"
+  ],
+  "outputs": [
+    "university-of-cape-town-articles-api-openapi.yml",
+    "university-of-cape-town-catalog-api-openapi.yml",
+    "university-of-cape-town-collections-api-openapi.yml",
+    "university-of-cape-town-projects-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
