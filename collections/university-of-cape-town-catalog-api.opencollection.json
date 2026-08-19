@@ -1,0 +1,74 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "DataFirst Microdata API (NADA) articles catalog API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "catalog",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List catalog studies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.datafirst.uct.ac.za/dataportal/index.php/api/catalog",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of rows per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of rows to skip."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of catalog entries (surveys / studies) with summary metadata. Confirmed to return hundreds of surveys in JSON."
+        },
+        {
+          "info": {
+            "name": "Search catalog studies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.datafirst.uct.ac.za/dataportal/index.php/api/catalog/search",
+            "params": [
+              {
+                "name": "sk",
+                "value": "",
+                "type": "query",
+                "description": "Search keywords / free-text query."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of rows per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of rows to skip."
+              }
+            ]
+          },
+          "docs": "Search the catalog of studies. Confirmed to return the same structured catalog response as the catalog listing endpoint."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

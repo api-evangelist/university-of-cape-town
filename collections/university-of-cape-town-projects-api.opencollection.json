@@ -1,0 +1,61 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "DataFirst Microdata Catalog API (NADA) articles projects API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "projects",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List public projects",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.datafirst.uct.ac.za/dataportal/index.php/api/projects",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page."
+              }
+            ]
+          },
+          "docs": "List public projects"
+        },
+        {
+          "info": {
+            "name": "Get a public project",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.datafirst.uct.ac.za/dataportal/index.php/api/projects/:project_id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a public project"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

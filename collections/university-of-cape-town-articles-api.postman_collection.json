@@ -1,0 +1,506 @@
+{
+  "item": [
+    {
+      "id": "4f8e6fb8-a84b-4b89-acd7-894659f14549",
+      "name": "articles",
+      "description": {
+        "content": "Public articles (research outputs / datasets)",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a5071e20-e3f9-478c-a1ad-2b6016c955d4",
+          "name": "List public articles",
+          "request": {
+            "name": "List public articles",
+            "description": {
+              "content": "Returns a list of public articles, optionally filtered and paginated.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "articles"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "Page number for pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "Number of results per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Number of results to skip."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Maximum number of results to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "institution",
+                  "value": "<integer>",
+                  "description": "Only return articles belonging to this institution id."
+                },
+                {
+                  "disabled": false,
+                  "key": "order",
+                  "value": "<string>",
+                  "description": "Field used to order results."
+                },
+                {
+                  "disabled": false,
+                  "key": "order_direction",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "24ccb143-cf8d-40d6-adb5-c84202169cb9",
+              "name": "A list of public articles.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "articles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "institution",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order_direction",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 32573085,\n    \"title\": \"string\",\n    \"doi\": \"10.6084/m9.figshare.32573085.v1\",\n    \"url\": \"https://api.figshare.com/v2/articles/32573085\",\n    \"timeline\": {\n      \"posted\": \"2026-06-04T02:59:32\",\n      \"firstOnline\": \"string\",\n      \"revision\": \"string\"\n    },\n    \"defined_type\": 3,\n    \"defined_type_name\": \"dataset\",\n    \"handle\": \"string\",\n    \"published_date\": \"2026-06-04T02:59:32Z\",\n    \"thumb\": \"http://FvoijPMuQhSLMqRRjXwZKARdQy.jcQwREx2\",\n    \"group_id\": 175,\n    \"url_public_api\": \"https://yTCGSyEpqlkatYIuAjAy.fjcbJ6Io98DMrytMPSiVi-S+5KKeUQzJEy5xkCrh0yLfFA02zGQXVKUkJ,tK\",\n    \"url_public_html\": \"http://fBxGngvodRM.zabgpyfuCrcfE5OrLJl1UPappwQ3PwyTUoT4D0bEnYS3BIQX,pKs1AeVcNz5VWDfTh+DY9HxtyzJgXJzD9XG,g+mnoy\",\n    \"resource_title\": \"string\",\n    \"resource_doi\": \"string\",\n    \"created_date\": \"2026-06-04T02:59:32Z\",\n    \"modified_date\": \"2026-06-04T02:59:32Z\"\n  },\n  {\n    \"id\": 32573085,\n    \"title\": \"string\",\n    \"doi\": \"10.6084/m9.figshare.32573085.v1\",\n    \"url\": \"https://api.figshare.com/v2/articles/32573085\",\n    \"timeline\": {\n      \"posted\": \"2026-06-04T02:59:32\",\n      \"firstOnline\": \"string\",\n      \"revision\": \"string\"\n    },\n    \"defined_type\": 3,\n    \"defined_type_name\": \"dataset\",\n    \"handle\": \"string\",\n    \"published_date\": \"2026-06-04T02:59:32Z\",\n    \"thumb\": \"https://cvFUlcIbNODxPKRlZkyk.dditEHk3aRUFphJWoztBtfc9pVqhgJhWvh6xoyDYtyxCfnFxQFzk65Vfc2gMxXb+\",\n    \"group_id\": 5820,\n    \"url_public_api\": \"http://JJBwwLlWUHzCrtBXweVlBcTeJOCDfkL.qnwaDSJzHnWkCs4V\",\n    \"url_public_html\": \"http://uVVyvJgXzpqVwHWyaNrytQLPi.oicCav2j9DDe6sDwkpf215iyq8\",\n    \"resource_title\": \"string\",\n    \"resource_doi\": \"string\",\n    \"created_date\": \"2026-06-04T02:59:32Z\",\n    \"modified_date\": \"2026-06-04T02:59:32Z\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "39479190-cf86-45e9-9ab7-0c8154379309",
+              "name": "The request was malformed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "articles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "institution",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order_direction",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "27e833e4-aa35-4360-90d0-ced8a9af8f82",
+          "name": "Search public articles",
+          "request": {
+            "name": "Search public articles",
+            "description": {
+              "content": "Search public articles using a structured search body. Supports full-text search, DOI/handle lookups, institution and group filters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "articles",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"search_for\": \"<string>\",\n  \"resource_doi\": \"<string>\",\n  \"doi\": \"<string>\",\n  \"handle\": \"<string>\",\n  \"project_id\": \"<integer>\",\n  \"item_type\": \"<integer>\",\n  \"institution\": \"<integer>\",\n  \"group\": \"<integer>\",\n  \"published_since\": \"<string>\",\n  \"modified_since\": \"<string>\",\n  \"order\": \"<string>\",\n  \"order_direction\": \"<string>\",\n  \"page\": \"<integer>\",\n  \"page_size\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "721fbccf-01e6-450c-af61-731b78fd9581",
+              "name": "A list of matching public articles.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "articles",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"search_for\": \"malaria south africa\",\n  \"resource_doi\": \"<string>\",\n  \"doi\": \"<string>\",\n  \"handle\": \"<string>\",\n  \"project_id\": \"<integer>\",\n  \"item_type\": \"<integer>\",\n  \"institution\": \"<integer>\",\n  \"group\": \"<integer>\",\n  \"published_since\": \"<string>\",\n  \"modified_since\": \"<string>\",\n  \"order\": \"<string>\",\n  \"order_direction\": \"<string>\",\n  \"page\": \"<integer>\",\n  \"page_size\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 32573085,\n    \"title\": \"string\",\n    \"doi\": \"10.6084/m9.figshare.32573085.v1\",\n    \"url\": \"https://api.figshare.com/v2/articles/32573085\",\n    \"timeline\": {\n      \"posted\": \"2026-06-04T02:59:32\",\n      \"firstOnline\": \"string\",\n      \"revision\": \"string\"\n    },\n    \"defined_type\": 3,\n    \"defined_type_name\": \"dataset\",\n    \"handle\": \"string\",\n    \"published_date\": \"2026-06-04T02:59:32Z\",\n    \"thumb\": \"http://FvoijPMuQhSLMqRRjXwZKARdQy.jcQwREx2\",\n    \"group_id\": 175,\n    \"url_public_api\": \"https://yTCGSyEpqlkatYIuAjAy.fjcbJ6Io98DMrytMPSiVi-S+5KKeUQzJEy5xkCrh0yLfFA02zGQXVKUkJ,tK\",\n    \"url_public_html\": \"http://fBxGngvodRM.zabgpyfuCrcfE5OrLJl1UPappwQ3PwyTUoT4D0bEnYS3BIQX,pKs1AeVcNz5VWDfTh+DY9HxtyzJgXJzD9XG,g+mnoy\",\n    \"resource_title\": \"string\",\n    \"resource_doi\": \"string\",\n    \"created_date\": \"2026-06-04T02:59:32Z\",\n    \"modified_date\": \"2026-06-04T02:59:32Z\"\n  },\n  {\n    \"id\": 32573085,\n    \"title\": \"string\",\n    \"doi\": \"10.6084/m9.figshare.32573085.v1\",\n    \"url\": \"https://api.figshare.com/v2/articles/32573085\",\n    \"timeline\": {\n      \"posted\": \"2026-06-04T02:59:32\",\n      \"firstOnline\": \"string\",\n      \"revision\": \"string\"\n    },\n    \"defined_type\": 3,\n    \"defined_type_name\": \"dataset\",\n    \"handle\": \"string\",\n    \"published_date\": \"2026-06-04T02:59:32Z\",\n    \"thumb\": \"https://cvFUlcIbNODxPKRlZkyk.dditEHk3aRUFphJWoztBtfc9pVqhgJhWvh6xoyDYtyxCfnFxQFzk65Vfc2gMxXb+\",\n    \"group_id\": 5820,\n    \"url_public_api\": \"http://JJBwwLlWUHzCrtBXweVlBcTeJOCDfkL.qnwaDSJzHnWkCs4V\",\n    \"url_public_html\": \"http://uVVyvJgXzpqVwHWyaNrytQLPi.oicCav2j9DDe6sDwkpf215iyq8\",\n    \"resource_title\": \"string\",\n    \"resource_doi\": \"string\",\n    \"created_date\": \"2026-06-04T02:59:32Z\",\n    \"modified_date\": \"2026-06-04T02:59:32Z\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f8e7570b-74c5-4b68-a17a-bf53e3e83427",
+              "name": "The request was malformed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "articles",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"search_for\": \"malaria south africa\",\n  \"resource_doi\": \"<string>\",\n  \"doi\": \"<string>\",\n  \"handle\": \"<string>\",\n  \"project_id\": \"<integer>\",\n  \"item_type\": \"<integer>\",\n  \"institution\": \"<integer>\",\n  \"group\": \"<integer>\",\n  \"published_since\": \"<string>\",\n  \"modified_since\": \"<string>\",\n  \"order\": \"<string>\",\n  \"order_direction\": \"<string>\",\n  \"page\": \"<integer>\",\n  \"page_size\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3a9a8b3d-fc6f-4af9-9767-d64a8c7f73b7",
+          "name": "Get a public article",
+          "request": {
+            "name": "Get a public article",
+            "description": {
+              "content": "Returns the complete public representation of a single article.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "articles",
+                ":article_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "article_id",
+                  "description": "(Required) Unique identifier of the article."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "aac91f41-b92f-495b-99bb-beb4632367bd",
+              "name": "The requested article.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "articles",
+                    ":article_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "article_id",
+                      "description": "(Required) Unique identifier of the article."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 32573085,\n  \"title\": \"string\",\n  \"doi\": \"10.6084/m9.figshare.32573085.v1\",\n  \"url\": \"https://api.figshare.com/v2/articles/32573085\",\n  \"timeline\": {\n    \"posted\": \"2026-06-04T02:59:32\",\n    \"firstOnline\": \"string\",\n    \"revision\": \"string\"\n  },\n  \"defined_type\": 3,\n  \"defined_type_name\": \"dataset\",\n  \"handle\": \"string\",\n  \"published_date\": \"2026-06-04T02:59:32Z\",\n  \"thumb\": \"https://lXSUCGtywIWaOtMuVp.cfbDeY.BcSKj6jzs\",\n  \"group_id\": 4518,\n  \"url_public_api\": \"https://FkusGWMpSweqAzUhXD.arnrjxWCd6UCcv-j1Vs+ht+q1vZsSyCM39Qzn+od\",\n  \"url_public_html\": \"https://IagsgJHfesuoLwFPSxGwPkYgWeicJVVsn.isnua4YfqTTeqGyVowo+0eAnC0s.l8H\",\n  \"resource_title\": \"string\",\n  \"resource_doi\": \"string\",\n  \"created_date\": \"2026-06-04T02:59:32Z\",\n  \"modified_date\": \"2026-06-04T02:59:32Z\",\n  \"figshare_url\": \"http://aIwGshATfAXBTeMwaTWdWij.efXUECR33DX6NuGrq+iqMG+O1W0Z\",\n  \"description\": \"string\",\n  \"download_disabled\": true,\n  \"files\": [\n    {\n      \"id\": 65270877,\n      \"name\": \"dataset.csv\",\n      \"size\": 17091,\n      \"is_link_only\": true,\n      \"download_url\": \"https://ndownloader.figshare.com/files/65270877\",\n      \"supplied_md5\": \"string\",\n      \"computed_md5\": \"string\",\n      \"mimetype\": \"text/csv\"\n    },\n    {\n      \"id\": 65270877,\n      \"name\": \"dataset.csv\",\n      \"size\": 17091,\n      \"is_link_only\": true,\n      \"download_url\": \"https://ndownloader.figshare.com/files/65270877\",\n      \"supplied_md5\": \"string\",\n      \"computed_md5\": \"string\",\n      \"mimetype\": \"text/csv\"\n    }\n  ],\n  \"folder_structure\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  },\n  \"authors\": [\n    {\n      \"id\": 24130866,\n      \"full_name\": \"Jane Researcher\",\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"is_active\": false,\n      \"url_name\": \"string\",\n      \"orcid_id\": \"0000-0002-1825-0097\"\n    },\n    {\n      \"id\": 24130866,\n      \"full_name\": \"Jane Researcher\",\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"is_active\": false,\n      \"url_name\": \"string\",\n      \"orcid_id\": \"0000-0002-1825-0097\"\n    }\n  ],\n  \"custom_fields\": [\n    {\n      \"name\": \"string\",\n      \"value\": \"\"\n    },\n    {\n      \"name\": \"string\",\n      \"value\": \"\"\n    }\n  ],\n  \"tags\": [\n    \"string\",\n    \"string\"\n  ],\n  \"categories\": [\n    {\n      \"id\": 2985,\n      \"title\": \"string\"\n    },\n    {\n      \"id\": 5353,\n      \"title\": \"string\"\n    }\n  ],\n  \"license\": {\n    \"value\": 7610,\n    \"name\": \"string\",\n    \"url\": \"https://bGlogiRuCnirvXMRcuMPJg.fpbY\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0e2aca91-eb36-40c3-ae6b-18b288e360ab",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "articles",
+                    ":article_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "article_id",
+                      "description": "(Required) Unique identifier of the article."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://www.datafirst.uct.ac.za/dataportal/index.php/api",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "39977b94-ccc9-42c6-bd88-28c6782922af",
+    "name": "DataFirst Microdata Catalog API (NADA) articles API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "DataFirst is a University of Cape Town research unit and data service providing online access to survey and administrative microdata from South Africa and other African countries. Its open data portal is built on the NADA (National Data Archive) cataloging tool, which exposes a public, unauthenticated REST/JSON API for browsing the catalog of studies. This OpenAPI description was reverse-engineered from confirmed live responses of the public catalog endpoint (verified returning survey metadata in JSON). Only paths and response fields actually observed in live responses are documented here.\n\nContact Support:\n Name: DataFirst",
+      "type": "text/plain"
+    }
+  }
+}

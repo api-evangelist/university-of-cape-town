@@ -1,0 +1,106 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "DataFirst Microdata Catalog API (NADA) articles API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "articles",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List public articles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.datafirst.uct.ac.za/dataportal/index.php/api/articles",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return."
+              },
+              {
+                "name": "institution",
+                "value": "",
+                "type": "query",
+                "description": "Only return articles belonging to this institution id."
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Field used to order results."
+              },
+              {
+                "name": "order_direction",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a list of public articles, optionally filtered and paginated."
+        },
+        {
+          "info": {
+            "name": "Search public articles",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.datafirst.uct.ac.za/dataportal/index.php/api/articles/search",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Search public articles using a structured search body. Supports full-text search, DOI/handle lookups, institution and group filters."
+        },
+        {
+          "info": {
+            "name": "Get a public article",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.datafirst.uct.ac.za/dataportal/index.php/api/articles/:article_id",
+            "params": [
+              {
+                "name": "article_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the article."
+              }
+            ]
+          },
+          "docs": "Returns the complete public representation of a single article."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

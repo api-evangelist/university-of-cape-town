@@ -1,0 +1,228 @@
+{
+  "item": [
+    {
+      "id": "60e972f5-1a9b-461b-ac43-313f94508724",
+      "name": "catalog",
+      "description": {
+        "content": "Browse and search the microdata catalog.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "60eb5dee-b0c0-47c0-a1ba-11c9e752d067",
+          "name": "List catalog studies",
+          "request": {
+            "name": "List catalog studies",
+            "description": {
+              "content": "Returns a paginated list of catalog entries (surveys / studies) with summary metadata. Confirmed to return hundreds of surveys in JSON.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "catalog"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "15",
+                  "description": "Maximum number of rows per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Number of rows to skip."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bd5662cc-ffa3-490a-8c9d-44a28b383397",
+              "name": "A page of catalog studies.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "catalog"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "15"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": {\n    \"found\": 573,\n    \"total\": 573,\n    \"limit\": 15,\n    \"offset\": 0,\n    \"search_counts_by_type\": {\n      \"survey\": 573\n    },\n    \"rows\": [\n      {\n        \"id\": 890,\n        \"type\": \"survey\",\n        \"idno\": \"mwi-alpha-him-karonga-2002-2017-v1\",\n        \"doi\": \"string\",\n        \"title\": \"ALPHA HIV Incidence and Mortality Data\",\n        \"subtitle\": \"Karonga 2002-2017\",\n        \"nation\": \"Malawi\",\n        \"authoring_entity\": \"string\",\n        \"form_model\": \"licensed\",\n        \"data_class_id\": 799,\n        \"year_start\": 2002,\n        \"year_end\": 2017,\n        \"thumbnail\": \"string\"\n      },\n      {\n        \"id\": 890,\n        \"type\": \"survey\",\n        \"idno\": \"mwi-alpha-him-karonga-2002-2017-v1\",\n        \"doi\": \"string\",\n        \"title\": \"ALPHA HIV Incidence and Mortality Data\",\n        \"subtitle\": \"Karonga 2002-2017\",\n        \"nation\": \"Malawi\",\n        \"authoring_entity\": \"string\",\n        \"form_model\": \"licensed\",\n        \"data_class_id\": 8158,\n        \"year_start\": 2002,\n        \"year_end\": 2017,\n        \"thumbnail\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9c156fb0-7844-4f64-8972-58724fbf9062",
+          "name": "Search catalog studies",
+          "request": {
+            "name": "Search catalog studies",
+            "description": {
+              "content": "Search the catalog of studies. Confirmed to return the same structured catalog response as the catalog listing endpoint.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "catalog",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "sk",
+                  "value": "<string>",
+                  "description": "Search keywords / free-text query."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "15",
+                  "description": "Maximum number of rows per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Number of rows to skip."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "80edbf61-0830-4bac-98fa-9b3a240bf270",
+              "name": "A page of matching catalog studies.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "catalog",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sk",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "15"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": {\n    \"found\": 573,\n    \"total\": 573,\n    \"limit\": 15,\n    \"offset\": 0,\n    \"search_counts_by_type\": {\n      \"survey\": 573\n    },\n    \"rows\": [\n      {\n        \"id\": 890,\n        \"type\": \"survey\",\n        \"idno\": \"mwi-alpha-him-karonga-2002-2017-v1\",\n        \"doi\": \"string\",\n        \"title\": \"ALPHA HIV Incidence and Mortality Data\",\n        \"subtitle\": \"Karonga 2002-2017\",\n        \"nation\": \"Malawi\",\n        \"authoring_entity\": \"string\",\n        \"form_model\": \"licensed\",\n        \"data_class_id\": 1836,\n        \"year_start\": 2002,\n        \"year_end\": 2017,\n        \"thumbnail\": \"string\"\n      },\n      {\n        \"id\": 890,\n        \"type\": \"survey\",\n        \"idno\": \"mwi-alpha-him-karonga-2002-2017-v1\",\n        \"doi\": \"string\",\n        \"title\": \"ALPHA HIV Incidence and Mortality Data\",\n        \"subtitle\": \"Karonga 2002-2017\",\n        \"nation\": \"Malawi\",\n        \"authoring_entity\": \"string\",\n        \"form_model\": \"licensed\",\n        \"data_class_id\": 6197,\n        \"year_start\": 2002,\n        \"year_end\": 2017,\n        \"thumbnail\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://www.datafirst.uct.ac.za/dataportal/index.php/api",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "4bd172f8-ab58-4f24-8d87-8da0abba9cd1",
+    "name": "DataFirst Microdata API (NADA) articles catalog API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "DataFirst is a University of Cape Town research unit and data service providing online access to survey and administrative microdata from South Africa and other African countries. Its open data portal is built on the NADA (National Data Archive) cataloging tool, which exposes a public, unauthenticated REST/JSON API for browsing the catalog of studies. This OpenAPI description was reverse-engineered from confirmed live responses of the public catalog endpoint (verified returning survey metadata in JSON). Only paths and response fields actually observed in live responses are documented here.\n\nContact Support:\n Name: DataFirst",
+      "type": "text/plain"
+    }
+  }
+}

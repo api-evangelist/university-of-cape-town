@@ -1,0 +1,259 @@
+{
+  "item": [
+    {
+      "id": "a92af03b-2810-48c5-9f63-09f664cdef20",
+      "name": "collections",
+      "description": {
+        "content": "Public collections",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3d32cb11-4d77-4882-8fbd-1af71ff4b24c",
+          "name": "List public collections",
+          "request": {
+            "name": "List public collections",
+            "description": {},
+            "url": {
+              "path": [
+                "collections"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "Page number for pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "Number of results per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "institution",
+                  "value": "<integer>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bd0e5dde-e7bc-4267-ab2d-551177f57431",
+              "name": "A list of public collections.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "institution",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 123,\n    \"title\": \"Sample collection\",\n    \"doi\": \"10.6084/m9.figshare.123\",\n    \"handle\": \"string\",\n    \"url\": \"https://api.figshare.com/v2/collections/123\",\n    \"timeline\": {\n      \"posted\": \"2026-06-04T02:59:32\",\n      \"firstOnline\": \"string\",\n      \"revision\": \"string\"\n    }\n  },\n  {\n    \"id\": 123,\n    \"title\": \"Sample collection\",\n    \"doi\": \"10.6084/m9.figshare.123\",\n    \"handle\": \"string\",\n    \"url\": \"https://api.figshare.com/v2/collections/123\",\n    \"timeline\": {\n      \"posted\": \"2026-06-04T02:59:32\",\n      \"firstOnline\": \"string\",\n      \"revision\": \"string\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "549dedbd-1f54-4452-84e4-dfc29fd5cbd4",
+          "name": "Get a public collection",
+          "request": {
+            "name": "Get a public collection",
+            "description": {},
+            "url": {
+              "path": [
+                "collections",
+                ":collection_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "collection_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c6e6b098-7549-420e-8c4d-c943a5ba52a2",
+              "name": "The requested collection.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    ":collection_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "collection_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 123,\n  \"title\": \"Sample collection\",\n  \"doi\": \"10.6084/m9.figshare.123\",\n  \"handle\": \"string\",\n  \"url\": \"https://api.figshare.com/v2/collections/123\",\n  \"timeline\": {\n    \"posted\": \"2026-06-04T02:59:32\",\n    \"firstOnline\": \"string\",\n    \"revision\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d0889ee4-9c9b-412e-bcd3-9401026d9c5e",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    ":collection_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "collection_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://www.datafirst.uct.ac.za/dataportal/index.php/api",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "bb923ba2-7c8a-4eee-adb4-9595bab4ae77",
+    "name": "DataFirst Microdata Catalog API (NADA) articles collections API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "DataFirst is a University of Cape Town research unit and data service providing online access to survey and administrative microdata from South Africa and other African countries. Its open data portal is built on the NADA (National Data Archive) cataloging tool, which exposes a public, unauthenticated REST/JSON API for browsing the catalog of studies. This OpenAPI description was reverse-engineered from confirmed live responses of the public catalog endpoint (verified returning survey metadata in JSON). Only paths and response fields actually observed in live responses are documented here.\n\nContact Support:\n Name: DataFirst",
+      "type": "text/plain"
+    }
+  }
+}
