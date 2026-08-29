@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: DataFirst Microdata API (NADA) articles catalog API
+  title: DataFirst Microdata API (NADA) Catalog API
   description: DataFirst is a University of Cape Town research unit and data service providing online access to survey and administrative microdata from South Africa and other African countries. Its open data portal is built on the NADA (National Data Archive) cataloging tool, which exposes a public, unauthenticated REST/JSON API for browsing the catalog of studies. This OpenAPI description was reverse-engineered from confirmed live responses of the public catalog endpoint (verified returning survey metadata in JSON). Only paths and response fields actually observed in live responses are documented here.
   version: '1.0'
   contact:
@@ -54,6 +54,11 @@ paths:
                 $ref: '#/components/schemas/CatalogResponse'
 components:
   schemas:
+    CatalogResponse:
+      type: object
+      properties:
+        result:
+          $ref: '#/components/schemas/CatalogResult'
     CatalogResult:
       type: object
       properties:
@@ -82,11 +87,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Study'
-    CatalogResponse:
-      type: object
-      properties:
-        result:
-          $ref: '#/components/schemas/CatalogResult'
     Study:
       type: object
       description: A single catalog study (survey).
@@ -104,8 +104,9 @@ components:
           description: Persistent study identifier.
           example: mwi-alpha-him-karonga-2002-2017-v1
         doi:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: DOI for the study, if assigned.
         title:
           type: string
@@ -125,8 +126,9 @@ components:
           description: Access model for the data.
           example: licensed
         data_class_id:
-          type: integer
-          nullable: true
+          type:
+          - integer
+          - 'null'
         year_start:
           type: integer
           example: 2002

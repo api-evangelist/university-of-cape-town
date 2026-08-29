@@ -1,20 +1,27 @@
 {
   "provider": "university-of-cape-town",
   "sources": [
-    "university-of-cape-town-articles-api-openapi.yml",
-    "university-of-cape-town-catalog-api-openapi.yml",
-    "university-of-cape-town-collections-api-openapi.yml",
-    "university-of-cape-town-projects-api-openapi.yml"
+    "_original/university-of-cape-town-datafirst-nada.yaml",
+    "_original/university-of-cape-town-zivahub-figshare.yaml"
   ],
   "outputs": [
-    "university-of-cape-town-articles-api-openapi.yml",
     "university-of-cape-town-catalog-api-openapi.yml",
+    "university-of-cape-town-articles-api-openapi.yml",
     "university-of-cape-town-collections-api-openapi.yml",
     "university-of-cape-town-projects-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "university-of-cape-town-datafirst-nada.yaml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "university-of-cape-town-zivahub-figshare.yaml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0"
+  ],
+  "skipped": [
+    "university-of-cape-town-articles-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "university-of-cape-town-catalog-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "university-of-cape-town-collections-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "university-of-cape-town-projects-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

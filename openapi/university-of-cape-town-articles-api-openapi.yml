@@ -1,14 +1,17 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: DataFirst Microdata Catalog API (NADA) articles API
-  description: DataFirst is a University of Cape Town research unit and data service providing online access to survey and administrative microdata from South Africa and other African countries. Its open data portal is built on the NADA (National Data Archive) cataloging tool, which exposes a public, unauthenticated REST/JSON API for browsing the catalog of studies. This OpenAPI description was reverse-engineered from confirmed live responses of the public catalog endpoint (verified returning survey metadata in JSON). Only paths and response fields actually observed in live responses are documented here.
-  version: '1.0'
+  title: ZivaHub Open Data (Figshare Public API) Articles API
+  description: ZivaHub is the University of Cape Town's institutional open data repository, powered by Figshare for Institutions. Public ZivaHub content (articles, collections, and projects) is accessible programmatically through the public Figshare REST API v2. This OpenAPI description covers the unauthenticated, read-only public endpoints relevant to discovering and harvesting public research outputs. It is a faithful subset of the official Figshare OpenAPI 3.0.3 specification published at https://api.figshare.com/v2/swagger.json (info.version 2.0), restricted to the public paths and response objects.
+  version: '2.0'
   contact:
-    name: DataFirst
-    url: https://www.datafirst.uct.ac.za/
+    name: Figshare Support
+    url: https://docs.figshare.com/
+  license:
+    name: Figshare API Terms
+    url: https://figshare.com/terms
 servers:
-- url: https://www.datafirst.uct.ac.za/dataportal/index.php/api
-  description: DataFirst NADA public catalog API
+- url: https://api.figshare.com/v2
+  description: Figshare public API v2
 tags:
 - name: articles
   description: Public articles (research outputs / datasets)
@@ -107,92 +110,20 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  responses:
+    BadRequest:
+      description: The request was malformed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
   schemas:
-    ArticleComplete:
-      type: object
-      description: Complete public representation of an article.
-      allOf:
-      - $ref: '#/components/schemas/Article'
-      - type: object
-        properties:
-          figshare_url:
-            type: string
-            format: uri
-          description:
-            type: string
-            description: HTML description of the article.
-          download_disabled:
-            type: boolean
-          files:
-            type: array
-            description: List of up to 10 article files.
-            items:
-              $ref: '#/components/schemas/PublicFile'
-          folder_structure:
-            type: object
-            additionalProperties:
-              type: string
-            description: Mapping of file ids to folder paths, if folders are used.
-          authors:
-            type: array
-            items:
-              $ref: '#/components/schemas/Author'
-          custom_fields:
-            type: array
-            items:
-              type: object
-              properties:
-                name:
-                  type: string
-                value: {}
-          tags:
-            type: array
-            items:
-              type: string
-          categories:
-            type: array
-            items:
-              type: object
-              properties:
-                id:
-                  type: integer
-                title:
-                  type: string
-          license:
-            type: object
-            properties:
-              value:
-                type: integer
-              name:
-                type: string
-              url:
-                type: string
-                format: uri
-    PublicFile:
-      type: object
-      properties:
-        id:
-          type: integer
-          example: 65270877
-        name:
-          type: string
-          example: dataset.csv
-        size:
-          type: integer
-          example: 17091
-        is_link_only:
-          type: boolean
-        download_url:
-          type: string
-          format: uri
-          example: https://ndownloader.figshare.com/files/65270877
-        supplied_md5:
-          type: string
-        computed_md5:
-          type: string
-        mimetype:
-          type: string
-          example: text/csv
     Article:
       type: object
       required:
@@ -259,20 +190,6 @@ components:
         modified_date:
           type: string
           example: '2026-06-04T02:59:32Z'
-    Timeline:
-      type: object
-      description: Publishing timeline for an item.
-      properties:
-        posted:
-          type: string
-          description: Date the item was posted.
-          example: '2026-06-04T02:59:32'
-        firstOnline:
-          type: string
-          description: Date the item first went online.
-        revision:
-          type: string
-          description: Date of the last revision.
     Author:
       type: object
       properties:
@@ -293,15 +210,6 @@ components:
         orcid_id:
           type: string
           example: 0000-0002-1825-0097
-    ErrorMessage:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Machine-readable error code.
-        message:
-          type: string
-          description: Human-readable error message.
     ArticleSearch:
       type: object
       description: Structured search body for public articles.
@@ -348,28 +256,115 @@ components:
           type: integer
         page_size:
           type: integer
-  responses:
-    BadRequest:
-      description: The request was malformed.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
+    ErrorMessage:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code.
+        message:
+          type: string
+          description: Human-readable error message.
+    Timeline:
+      type: object
+      description: Publishing timeline for an item.
+      properties:
+        posted:
+          type: string
+          description: Date the item was posted.
+          example: '2026-06-04T02:59:32'
+        firstOnline:
+          type: string
+          description: Date the item first went online.
+        revision:
+          type: string
+          description: Date of the last revision.
+    PublicFile:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 65270877
+        name:
+          type: string
+          example: dataset.csv
+        size:
+          type: integer
+          example: 17091
+        is_link_only:
+          type: boolean
+        download_url:
+          type: string
+          format: uri
+          example: https://ndownloader.figshare.com/files/65270877
+        supplied_md5:
+          type: string
+        computed_md5:
+          type: string
+        mimetype:
+          type: string
+          example: text/csv
+    ArticleComplete:
+      type: object
+      description: Complete public representation of an article.
+      allOf:
+      - $ref: '#/components/schemas/Article'
+      - type: object
+        properties:
+          figshare_url:
+            type: string
+            format: uri
+          description:
+            type: string
+            description: HTML description of the article.
+          download_disabled:
+            type: boolean
+          files:
+            type: array
+            description: List of up to 10 article files.
+            items:
+              $ref: '#/components/schemas/PublicFile'
+          folder_structure:
+            type: object
+            additionalProperties:
+              type: string
+            description: Mapping of file ids to folder paths, if folders are used.
+          authors:
+            type: array
+            items:
+              $ref: '#/components/schemas/Author'
+          custom_fields:
+            type: array
+            items:
+              type: object
+              properties:
+                name:
+                  type: string
+                value: {}
+          tags:
+            type: array
+            items:
+              type: string
+          categories:
+            type: array
+            items:
+              type: object
+              properties:
+                id:
+                  type: integer
+                title:
+                  type: string
+          license:
+            type: object
+            properties:
+              value:
+                type: integer
+              name:
+                type: string
+              url:
+                type: string
+                format: uri
   parameters:
-    pageSize:
-      name: page_size
-      in: query
-      description: Number of results per page.
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 1000
     page:
       name: page
       in: query
@@ -388,6 +383,14 @@ components:
       name: limit
       in: query
       description: Maximum number of results to return.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 1000
+    pageSize:
+      name: page_size
+      in: query
+      description: Number of results per page.
       schema:
         type: integer
         minimum: 1
