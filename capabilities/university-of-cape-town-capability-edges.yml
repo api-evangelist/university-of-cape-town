@@ -1,0 +1,25 @@
+slug: university-of-cape-town
+provider: University of Cape Town
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Education
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 1
+edges:
+- tag: articles
+  spec_file: university-of-cape-town-articles-api-openapi.yml
+  capability_id: BC-4780.40
+  capability_id_l1: BC-4780
+  capability_name: Scholarly Output & Publication Management
+  confidence: 0.85
+  evidence: restricted to the public paths ... for discovering and harvesting public research outputs;
+    GET /articles  listArticles  List public articles
+  reason: The vendor description states this is UCT's institutional open data repository and the endpoints
+    list, search and retrieve public research outputs — stewardship and dissemination of scholarly output.
