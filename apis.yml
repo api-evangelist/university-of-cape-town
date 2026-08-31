@@ -1,67 +1,92 @@
 ---
 aid: university-of-cape-town
 name: University of Cape Town
+x-type: university
+x-category: Public Research University
 description: >-
-  The University of Cape Town (UCT) is South Africa's leading public research
-  university, ranked #96 in the QS World University Rankings 2025 and the
-  highest-ranked university on the African continent. UCT does not operate a
-  single consolidated developer portal, but several of its research and library
-  units expose public, machine-readable interfaces. DataFirst runs a NADA-based
-  microdata catalog with a public REST API, the OpenUCT institutional repository
-  exposes a DSpace OAI-PMH metadata harvesting endpoint, and the ZivaHub open
-  data repository is built on Figshare for Institutions and is reachable through
-  the public Figshare API. Most operational, student-information, and identity
-  systems remain gated behind institutional authentication.
+  The University of Cape Town (UCT) is South Africa's oldest and highest-ranked
+  public research university and the top-ranked institution on the African
+  continent. UCT operates no central developer portal and publishes no
+  institution-wide API programme; its student-information, finance, HR and
+  learning-management systems are vendor platforms behind institutional
+  authentication and are not programmable from outside. What UCT does operate
+  itself is a small, genuinely first-party research-data footprint: DataFirst, a
+  UCT research unit, runs a NADA microdata catalog on www.datafirst.uct.ac.za
+  with a public unauthenticated REST/JSON API over 582 studies; OpenUCT, the
+  institutional repository, runs DSpace 7.4 on open.uct.ac.za and exposes both
+  an OAI-PMH 2.0 harvesting endpoint and the DSpace REST API anonymously; and
+  UCT's ICTS operates a SAML 2.0 identity provider registered in the South
+  African Identity Federation (SAFIRE) and published to eduGAIN. UCT is a
+  DataCite direct member (symbol DAFI, ROR 03p74gp79) minting under prefixes
+  10.25828 and 10.25375. ZivaHub, the open data repository, is a Figshare for
+  Institutions tenancy — zivahub.uct.ac.za CNAMEs to figshare.com — so the data
+  is UCT's and the API contract is Figshare's; it is recorded here as a tenant
+  relationship and is deliberately not scored as UCT engineering.
 type: Index
+x-operator-summary:
+  institution: 4
+  tenant: 1
+  vendor: 0
 deliveryModel:
   model: saas
   open_source: false
-  commercial: true
+  commercial: false
   callable_host: true
   label: Hosted service · you call their endpoint
   confidence: high
   source:
   - openapi
-  - pricing
-  generated: '2026-08-28'
-  method: derived
+  generated: '2026-08-30'
+  method: probed
 accessModel:
   pricing: free
-  onboarding: unknown
+  onboarding: none
   trial: false
-  try_now: false
-  public: false
-  label: Free
-  confidence: medium
+  try_now: true
+  public: true
+  label: Free · no key required for catalog metadata
+  confidence: high
   source:
-  - plans
-  generated: '2026-07-22'
-  method: derived
-position: Consumer
-access: 3rd-Party
+  - probe
+  generated: '2026-08-30'
+  method: probed
+position: Provider
+access: Public
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/university-of-cape-town.png
 url: https://raw.githubusercontent.com/api-evangelist/university-of-cape-town/refs/heads/main/apis.yml
 tags:
-  - Education
-  - Higher Education
   - University
+  - Higher Education
+  - Education
+  - Public Research University
+  - South Africa
+  - Africa
   - Research Data
   - Open Data
   - Institutional Repository
   - OAI-PMH
-  - South Africa
-  - Africa
+  - Identity Federation
+  - Microdata
+  - Research Computing
 created: '2026-06-03'
-modified: '2026-06-03'
+modified: '2026-08-30'
 specificationVersion: '0.23'
 apis:
 - aid: university-of-cape-town:datafirst-nada
   name: DataFirst Microdata Catalog API (NADA)
+  x-operator: institution
+  x-surface-class: OpenData
   description: >-
-    DataFirst is a UCT research unit and data service providing online access to survey and administrative
-    microdata from South Africa and other African countries. Its open data portal is built on the NADA
-    (National Data Archive) cataloging tool, which exposes a public REST/JSON API for browsing the catalog
-    of studies. The catalog endpoint returns survey metadata (hundreds of confirmed surveys) in JSON.
+    DataFirst is a University of Cape Town research unit and data service
+    providing online access to survey and administrative microdata from South
+    Africa and other African countries. Its open data portal runs the NADA
+    (National Data Archive) application on UCT's own host and exposes a public,
+    unauthenticated REST/JSON API. Probed live on 2026-08-30: GET /catalog
+    returned 582 studies; /catalog/search, /catalog/{idno},
+    /catalog/data_files/{idno} and /catalog/variables/{idno} all answered 200.
+    Catalog metadata is fully open; the underlying microdata for `licensed`
+    studies still requires an approved DataFirst account, and that request
+    workflow has no API.
   humanURL: https://www.datafirst.uct.ac.za/dataportal/index.php/catalog
   baseURL: https://www.datafirst.uct.ac.za/dataportal/index.php/api
   tags:
@@ -72,17 +97,32 @@ apis:
   - Catalog
   - Surveys
   properties:
+  - type: OpenAPI
+    url: openapi/university-of-cape-town-catalog-api-openapi.yml
   - type: Documentation
     url: https://www.datafirst.uct.ac.za/dataportal/index.php/catalog
   - type: Website
     url: https://www.datafirst.uct.ac.za/
+  - type: TermsOfService
+    url: https://www.datafirst.uct.ac.za/dataportal/index.php/terms-of-use
+  - type: x-collection
+    url: collections/university-of-cape-town-catalog-api.opencollection.json
+  - type: x-postman
+    url: collections/university-of-cape-town-catalog-api.postman_collection.json
 - aid: university-of-cape-town:openuct-oai-pmh
   name: OpenUCT Institutional Repository OAI-PMH
+  x-operator: institution
+  x-surface-class: ResearchRepository
   description: >-
-    OpenUCT is the University of Cape Town's open access institutional repository, launched in 2014 and
-    built on DSpace. It preserves and openly shares UCT scholarly outputs including theses, dissertations,
-    journal articles, reports, and open educational resources. The repository exposes a standards-compliant
-    OAI-PMH 2.0 metadata harvesting interface supporting verbs such as Identify, ListRecords, and ListMetadataFormats.
+    OpenUCT is the University of Cape Town's open access institutional
+    repository, running DSpace 7.4 on UCT's own host. It preserves and openly
+    shares UCT scholarly outputs including theses, dissertations, journal
+    articles, reports and open educational resources, and exposes a
+    standards-compliant OAI-PMH 2.0 metadata harvesting interface. Probed live
+    on 2026-08-30: Identify returns repositoryName OpenUCT, repositoryIdentifier
+    open.uct.ac.za, adminEmail lucian.botha@uct.ac.za, earliest datestamp 1994;
+    ListMetadataFormats and ListSets both answer 200. The repository software is
+    open-source DSpace; the deployment, the host and the endpoint are UCT's.
   humanURL: https://open.uct.ac.za/
   baseURL: https://open.uct.ac.za/server/oai/request
   tags:
@@ -95,108 +135,177 @@ apis:
   properties:
   - type: Documentation
     url: https://open.uct.ac.za/
-  - type: Authentication
+  - type: x-identify
     url: https://open.uct.ac.za/server/oai/request?verb=Identify
-- aid: university-of-cape-town:zivahub-figshare
-  name: ZivaHub Open Data (Figshare API)
+  - type: x-conformance
+    url: conformance/university-of-cape-town-conformance.yml
+- aid: university-of-cape-town:openuct-dspace-rest
+  name: OpenUCT DSpace REST API
+  x-operator: institution
+  x-surface-class: ResearchRepository
   description: >-
-    ZivaHub is UCT's institutional open data repository for research data and scholarly outputs, powered
-    by Figshare for Institutions and certified with the CoreTrustSeal in 2025. Public ZivaHub content
-    is accessible programmatically through the public Figshare REST API, which provides article, collection,
-    and project metadata in JSON.
+    The OpenUCT repository additionally exposes the DSpace 7 REST API
+    anonymously at open.uct.ac.za/server/api, returning application/hal+json.
+    Probed live on 2026-08-30: the API root reports dspaceName OpenUCT and
+    dspaceVersion "DSpace 7.4"; /server/api/core/communities and
+    /server/api/discover/search/objects both answer 200 without credentials. No
+    OpenAPI is saved for this surface — the REST contract is DSpace's software
+    contract shipped by every DSpace 7 site, not UCT-authored, and crediting UCT
+    for it would repeat exactly the misattribution this profile exists to
+    remove. UCT operates the deployment; the contract belongs upstream.
+  humanURL: https://open.uct.ac.za/
+  baseURL: https://open.uct.ac.za/server/api
+  tags:
+  - Institutional Repository
+  - DSpace
+  - REST
+  - HAL
+  - Open Access
+  properties:
+  - type: Documentation
+    url: https://open.uct.ac.za/server/api
+  - type: x-upstream-contract
+    url: https://github.com/DSpace/RestContract
+- aid: university-of-cape-town:identity-provider
+  name: UCT Identity Provider (SAML 2.0 / SAFIRE / eduGAIN)
+  x-operator: institution
+  x-surface-class: IdentityFederation
+  description: >-
+    UCT's Information and Communication Technology Services operates a SAML 2.0
+    identity provider registered in the South African Identity Federation
+    (SAFIRE, registry id 000002) and published onward to eduGAIN. Confirmed in
+    SAFIRE's signed production metadata on 2026-08-30: entityID
+    https://srvslsfed001.uct.ac.za/simplesaml/saml2/idp/metadata.php,
+    schacHomeOrganization uct.ac.za, homeOrganizationType university, scopes
+    uct.ac.za / wf.uct.ac.za / ^([a-z0-9]{1,63})\.uct\.ac\.za$, REFEDS Research
+    & Scholarship and Anonymous entity categories, SIRTFI assurance, and a
+    published CSIRT security contact. This is a machine-readable,
+    institution-operated surface — it is not a REST API and has no token
+    endpoint an agent can call, but it is the one interface UCT publishes to the
+    world that is unambiguously its own engineering. UCT publishes the metadata
+    itself at idp.uct.ac.za (200, application/samlmetadata+xml, 2026-08-30);
+    the entityID hostname srvslsfed001.uct.ac.za is an internal name that does
+    not resolve publicly, which is normal for a SAML entityID.
+  humanURL: https://icts.uct.ac.za/
+  baseURL: https://idp.uct.ac.za/simplesaml/saml2/idp/metadata.php
+  x-entity-id: https://srvslsfed001.uct.ac.za/simplesaml/saml2/idp/metadata.php
+  tags:
+  - Identity Federation
+  - SAML
+  - SAFIRE
+  - eduGAIN
+  - Single Sign-On
+  - SIRTFI
+  properties:
+  - type: x-metadata
+    url: https://idp.uct.ac.za/simplesaml/saml2/idp/metadata.php
+    name: UCT-published SAML 2.0 IdP metadata (application/samlmetadata+xml)
+  - type: x-metadata
+    url: https://metadata.safire.ac.za/safire-prod-idp.xml
+    name: The same entity as signed and republished by SAFIRE
+  - type: Documentation
+    url: https://safire.ac.za/participants/idp/list/
+  - type: PrivacyPolicy
+    url: https://idp.uct.ac.za/Privacy.html
+  - type: x-conformance
+    url: conformance/university-of-cape-town-conformance.yml
+- aid: university-of-cape-town:zivahub-figshare
+  name: ZivaHub Open Data (Figshare for Institutions tenancy)
+  x-operator: tenant
+  x-surface-class: ResearchRepository
+  x-vendor: figshare
+  x-vendor-repo: https://github.com/api-evangelist/figshare
+  description: >-
+    ZivaHub is UCT's institutional open data repository for research data and
+    scholarly outputs. It is a Figshare for Institutions TENANCY, not a UCT
+    system: zivahub.uct.ac.za CNAMEs to figshare.com, and public ZivaHub content
+    is served by the shared api.figshare.com/v2 endpoint that every Figshare
+    customer calls. The deposits, the DOIs (minted through DataCite client
+    figshare.uct under UCT's DAFI membership) and the CoreTrustSeal
+    certification are UCT's; the API contract is Figshare's. No Figshare OpenAPI
+    is stored under this institution — four such specs were removed from this
+    repo on 2026-08-30 — and the contract is scored against Figshare's own repo
+    where it belongs. This entry records a real institutional relationship, not
+    a UCT API.
   humanURL: https://zivahub.uct.ac.za/
-  baseURL: https://api.figshare.com/v2
+  baseURL: https://zivahub.uct.ac.za/
   tags:
   - Open Data
   - Research Data
   - Figshare
   - Repository
-  - Metadata
+  - Tenant
+  - CoreTrustSeal
   properties:
-  - type: Documentation
-    url: https://docs.figshare.com/
   - type: Website
     url: https://zivahub.uct.ac.za/
-- aid: university-of-cape-town:university-of-cape-town-articles-api
-  name: University of Cape Town articles API
-  description: Public articles (research outputs / datasets)
-  humanURL: https://www.datafirst.uct.ac.za/dataportal/index.php/catalog
-  baseURL: https://www.datafirst.uct.ac.za/dataportal/index.php/api
-  tags:
-  - Articles
-  tags_raw:
-  - articles
-  properties:
-  - type: OpenAPI
-    url: openapi/university-of-cape-town-articles-api-openapi.yml
-- aid: university-of-cape-town:university-of-cape-town-catalog-api
-  name: University of Cape Town catalog API
-  description: Browse and search the microdata catalog.
-  humanURL: https://www.datafirst.uct.ac.za/dataportal/index.php/catalog
-  baseURL: https://www.datafirst.uct.ac.za/dataportal/index.php/api
-  tags:
-  - Catalog
-  tags_raw:
-  - catalog
-  properties:
-  - type: OpenAPI
-    url: openapi/university-of-cape-town-catalog-api-openapi.yml
-- aid: university-of-cape-town:university-of-cape-town-collections-api
-  name: University of Cape Town collections API
-  description: Public collections
-  humanURL: https://www.datafirst.uct.ac.za/dataportal/index.php/catalog
-  baseURL: https://www.datafirst.uct.ac.za/dataportal/index.php/api
-  tags:
-  - Collection
-  tags_raw:
-  - collections
-  properties:
-  - type: OpenAPI
-    url: openapi/university-of-cape-town-collections-api-openapi.yml
-- aid: university-of-cape-town:university-of-cape-town-projects-api
-  name: University of Cape Town projects API
-  description: Public projects
-  humanURL: https://www.datafirst.uct.ac.za/dataportal/index.php/catalog
-  baseURL: https://www.datafirst.uct.ac.za/dataportal/index.php/api
-  tags:
-  - Project
-  tags_raw:
-  - projects
-  properties:
-  - type: OpenAPI
-    url: openapi/university-of-cape-town-projects-api-openapi.yml
+  - type: Documentation
+    url: https://docs.figshare.com/
 common:
-  - type: CapabilityMap
-    url: capabilities/university-of-cape-town-capability-edges.yml
-    name: University of Cape Town Business Capability Map
-  - type: AgenticAccess
-    url: agentic-access/university-of-cape-town-agentic-access.yml
-  - type: DomainSecurity
-    url: security/university-of-cape-town-domain-security.yml
   - type: Website
     url: https://www.uct.ac.za/
+  - type: OpenData
+    url: https://www.datafirst.uct.ac.za/
+    name: DataFirst open microdata portal
+  - type: ResearchRepository
+    url: https://open.uct.ac.za/
+    name: OpenUCT institutional repository (DSpace 7.4)
+  - type: ResearchRepository
+    url: https://zivahub.uct.ac.za/
+    name: ZivaHub open data repository (Figshare tenancy)
+  - type: IdentityFederation
+    url: https://metadata.safire.ac.za/safire-prod-idp.xml
+    name: UCT SAML 2.0 IdP metadata in SAFIRE
+  - type: ResearchComputing
+    url: https://ucthpc.uct.ac.za/
+    name: UCT High Performance Computing
+  - type: ResearchComputing
+    url: https://www.uct.ac.za/eresearch
+    name: UCT eResearch
+  - type: LibraryCatalog
+    url: https://lib.uct.ac.za/
+    name: UCT Libraries (discovery layer is vendor-operated)
+  - type: AIPolicy
+    url: https://cilt.uct.ac.za/artificial-intelligence
+    name: UCT Framework for Artificial Intelligence in Education
+  - type: AIPolicy
+    url: https://libguides.lib.uct.ac.za/c.php?g=1440358&p=11020298
+    name: UCT AI in Education Framework (library guide)
+  - type: GitHub
+    url: https://github.com/uct-eresearch
+    name: UCT eResearch on GitHub
   - type: GitHub
     url: https://github.com/uct-cbio
+    name: UCT Computational Biology on GitHub
   - type: LinkedIn
     url: https://za.linkedin.com/school/university-of-cape-town/
-  - type: Plans
-    url: plans/university-of-cape-town-plans-pricing.yml
-  - type: RateLimits
-    url: rate-limits/university-of-cape-town-rate-limits.yml
-  - type: FinOps
-    url: finops/university-of-cape-town-finops.yml
-  - type: Review
-    url: review.yml
-  - type: OpenAPI
-    url: openapi/_original/university-of-cape-town-zivahub-figshare.yaml
+  - type: Blog
+    url: https://www.news.uct.ac.za/
+    name: UCT News
+  - type: Support
+    url: https://icts.uct.ac.za/
+    name: UCT ICTS
+  - type: TermsOfService
+    url: https://uct.ac.za/calendar/terms
+  - type: PrivacyPolicy
+    url: https://uct.ac.za/protection-personal-information-act-popia
+    name: Protection of Personal Information Act (POPIA) at UCT
+  - type: x-ror
+    url: https://ror.org/03p74gp79
   - type: OpenAPI
     url: openapi/_original/university-of-cape-town-datafirst-nada.yaml
-  - type: x-json-schema
-    url: json-schema/university-of-cape-town-article-schema.json
+  - type: x-conformance
+    url: conformance/university-of-cape-town-conformance.yml
+  - type: x-authentication
+    url: authentication/university-of-cape-town-authentication.yml
+  - type: x-errors
+    url: errors/university-of-cape-town-errors.yml
   - type: x-json-schema
     url: json-schema/university-of-cape-town-study-schema.json
-  - type: x-json-structure
-    url: json-structure/university-of-cape-town-article-structure.json
+  - type: x-json-schema
+    url: json-schema/university-of-cape-town-datafile-schema.json
+  - type: x-json-schema
+    url: json-schema/university-of-cape-town-variable-schema.json
   - type: x-json-structure
     url: json-structure/university-of-cape-town-study-structure.json
   - type: x-spectral-rules
@@ -205,6 +314,102 @@ common:
     url: vocabulary/university-of-cape-town-vocabulary.yml
   - type: x-json-ld
     url: json-ld/university-of-cape-town-context.jsonld
+  - type: CapabilityMap
+    url: capabilities/university-of-cape-town-capability-edges.yml
+    name: University of Cape Town Business Capability Map
+  - type: AgenticAccess
+    url: agentic-access/university-of-cape-town-agentic-access.yml
+  - type: DomainSecurity
+    url: security/university-of-cape-town-domain-security.yml
+  - type: Plans
+    url: plans/university-of-cape-town-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/university-of-cape-town-rate-limits.yml
+  - type: FinOps
+    url: finops/university-of-cape-town-finops.yml
+  - type: Review
+    url: review.yml
+x-coverage:
+  state: covered
+  reason: covered
+  detail: >-
+    Four institution-operated surfaces were found and probed live on 2026-08-30
+    — the DataFirst NADA catalog API, the OpenUCT OAI-PMH endpoint, the OpenUCT
+    DSpace REST API, and UCT's SAML 2.0 identity provider in SAFIRE/eduGAIN —
+    plus one tenant relationship (ZivaHub on Figshare for Institutions). UCT
+    still has no central developer portal, no course-catalog or timetable API,
+    no campus-life API and no public API programme; the classes hunted and not
+    found are listed under surfaces_absent. Coverage is `covered` rather than
+    `none` because real first-party machine-readable surfaces exist and are
+    documented here, not because the footprint is large.
+  generated: '2026-08-30'
+  method: probed
+  surfaces_absent:
+    - class: CourseCatalog
+      detail: >-
+        No api.uct.ac.za or courses.uct.ac.za responded (both timed out at the
+        network layer); no student-built, institution-blessed timetable API of
+        the UCLAPI / NUSMods kind was found for UCT.
+    - class: OpenDataPortal
+      detail: data.uct.ac.za does not resolve; there is no CKAN or Socrata portal.
+    - class: LearningManagementSystem
+      detail: >-
+        Amathuba (D2L Brightspace) and legacy Vula (Sakai) are vendor platforms
+        behind authentication; no UCT-published LTI or Caliper surface.
+    - class: LibraryCatalog
+      detail: >-
+        Discovery runs on a vendor stack; no UCT-operated catalog API found.
+    - class: CampusLife
+      detail: No transit, dining, occupancy, room-booking or printing API found.
+  evidence:
+    - url: https://www.datafirst.uct.ac.za/dataportal/index.php/api/catalog?limit=2
+      status: 200
+    - url: https://www.datafirst.uct.ac.za/dataportal/index.php/api/catalog/mwi-alpha-him-karonga-2002-2017-v1
+      status: 200
+    - url: https://www.datafirst.uct.ac.za/dataportal/index.php/api/catalog/variables/mwi-alpha-him-karonga-2002-2017-v1
+      status: 200
+    - url: https://open.uct.ac.za/server/oai/request?verb=Identify
+      status: 200
+    - url: https://open.uct.ac.za/server/api
+      status: 200
+    - url: https://open.uct.ac.za/server/api/discover/search/objects?size=1
+      status: 200
+    - url: https://metadata.safire.ac.za/safire-prod-idp.xml
+      status: 200
+    - url: https://idp.uct.ac.za/simplesaml/saml2/idp/metadata.php
+      status: 200
+      note: UCT-published SAML metadata, application/samlmetadata+xml
+    - url: https://api.datacite.org/providers?query=cape+town
+      status: 200
+    - url: https://zivahub.uct.ac.za/
+      status: 202
+      note: empty 202 bot challenge from the Figshare edge; host is live, CNAME figshare.com
+    - url: https://data.uct.ac.za/
+      status: 0
+      note: DNS does not resolve
+    - url: https://api.uct.ac.za/
+      status: 0
+      note: connection timed out
+    - url: https://courses.uct.ac.za/
+      status: 0
+      note: connection timed out
+    - url: https://www.uct.ac.za/llms.txt
+      status: 404
+x-attribution-correction:
+  date: '2026-08-30'
+  pipeline: pipeline-university
+  removed_vendor_contracts: 4
+  detail: >-
+    Four Figshare contracts and ten derived artifacts were removed from this
+    repo. openapi/_original/university-of-cape-town-zivahub-figshare.yaml and
+    its three refine-split outputs (articles, collections, projects) all declared
+    servers[0].url https://api.figshare.com/v2 and info.contact "Figshare
+    Support" — a host four other institutions in this cohort also claimed. The
+    apis.yml entries for them additionally carried a WELD: they were based on
+    www.datafirst.uct.ac.za while the specs underneath said api.figshare.com, so
+    a single vendor contract was presenting as three UCT APIs on a UCT host. The
+    relationship is preserved as the ZivaHub tenant entry above; only the
+    misattributed engineering credit is gone.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
