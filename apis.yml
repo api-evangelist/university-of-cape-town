@@ -194,6 +194,13 @@ apis:
   - SAML
   - SAFIRE
   - eduGAIN
+  - SSO
+  - SIRTFI
+  tags_raw:
+  - Identity Federation
+  - SAML
+  - SAFIRE
+  - eduGAIN
   - Single Sign-On
   - SIRTFI
   properties:
@@ -230,6 +237,13 @@ apis:
   humanURL: https://zivahub.uct.ac.za/
   baseURL: https://zivahub.uct.ac.za/
   tags:
+  - Open Data
+  - Research Data
+  - Figshare
+  - Repository
+  - Tenants
+  - CoreTrustSeal
+  tags_raw:
   - Open Data
   - Research Data
   - Figshare
