@@ -1,0 +1,116 @@
+generated: '2026-08-30'
+method: probed
+source: Live probes run 2026-08-30 against open.uct.ac.za, www.datafirst.uct.ac.za, metadata.safire.ac.za
+  and api.datacite.org. Every claim below points at the exact response that evidences it.
+x-operator: institution
+regime: education
+description: 'Domain-standard conformance for the University of Cape Town, measured against the Kin Score
+  education regime standards list. REWARD-ONLY: only standards with a fetched, quotable response are recorded.
+  Standards UCT is NOT evidenced against are listed under not_evidenced so the absence is explicit rather
+  than silent.'
+conformance:
+- standard: oai-pmh
+  name: Open Archives Initiative Protocol for Metadata Harvesting 2.0
+  status: conformant
+  x-operator: institution
+  surface: OpenUCT institutional repository
+  evidence:
+  - url: https://open.uct.ac.za/server/oai/request?verb=Identify
+    status: 200
+    content_type: text/xml
+    excerpt: <repositoryName>OpenUCT</repositoryName> <baseURL>https://open.uct.ac.za/server/oai/request</baseURL>
+      <protocolVersion>2.0</protocolVersion> <adminEmail>lucian.botha@uct.ac.za</adminEmail> <repositoryIdentifier>open.uct.ac.za</repositoryIdentifier>
+      <sampleIdentifier>oai:open.uct.ac.za:11427/1234</sampleIdentifier>
+  - url: https://open.uct.ac.za/server/oai/request?verb=ListMetadataFormats
+    status: 200
+    content_type: text/xml
+  - url: https://open.uct.ac.za/server/oai/request?verb=ListSets
+    status: 200
+    content_type: text/xml
+  note: The endpoint is on UCT's own registrable domain and the adminEmail is a uct.ac.za address. The
+    repository software is DSpace 7.4 (open source); the deployment and the harvesting endpoint are UCT's.
+- standard: saml
+  name: SAML 2.0 identity federation (SAFIRE / eduGAIN)
+  status: conformant
+  x-operator: institution
+  surface: UCT identity provider, operated by ICTS
+  evidence:
+  - url: https://idp.uct.ac.za/simplesaml/saml2/idp/metadata.php
+    status: 200
+    content_type: application/samlmetadata+xml
+    note: UCT publishes its own SAML 2.0 IdP metadata on its own host
+  - url: https://metadata.safire.ac.za/safire-prod-idp.xml
+    status: 200
+    content_type: application/samlmetadata+xml
+    excerpt: entityID="https://srvslsfed001.uct.ac.za/simplesaml/saml2/idp/metadata.php" ID="SAFIRE000002";
+      schacHomeOrganization=uct.ac.za; schacHomeOrganizationType=urn:schac:homeOrganizationType:int:university;
+      publish-to-edugain=true; SingleSignOnService https://idp.uct.ac.za/simplesaml/module.php/saml/idp/singleSignOnService
+  - url: https://metadata.safire.ac.za/safire-idp-proxy-metadata.xml
+    status: 200
+    note: same UCT entity, republished through the SAFIRE IdP proxy
+  entity_id: https://srvslsfed001.uct.ac.za/simplesaml/saml2/idp/metadata.php
+  federation: South African Identity Federation (SAFIRE), registrationAuthority https://safire.ac.za
+  exported_to: eduGAIN
+  scopes:
+  - uct.ac.za
+  - wf.uct.ac.za
+  - ^([a-z0-9]{1,63})\.uct\.ac\.za$
+  entity_categories:
+  - http://refeds.org/category/research-and-scholarship
+  - https://refeds.org/category/anonymous
+  assurance:
+  - https://refeds.org/sirtfi
+  note: Implemented with SimpleSAMLphp, not the Shibboleth IdP — the protocol conformance is SAML 2.0.
+    Recorded as `saml`, NOT as `shibboleth`.
+  self_published_metadata: https://idp.uct.ac.za/simplesaml/saml2/idp/metadata.php
+- standard: datacite
+  name: DataCite DOI registration
+  status: conformant
+  x-operator: institution
+  surface: UCT as a DataCite direct member
+  evidence:
+  - url: https://api.datacite.org/providers?query=cape+town
+    status: 200
+    content_type: application/json
+    excerpt: id "dafi", name "University of Cape Town", symbol "DAFI", memberType "direct_member", organizationType
+      "academicInstitution", country "ZA", joined "2017-08-21", rorId "https://ror.org/03p74gp79"
+  - url: https://api.datacite.org/prefixes/10.25828
+    status: 200
+    content_type: application/json
+    excerpt: prefix 10.25828 -> client dafi.client -> provider dafi
+  - url: https://www.datafirst.uct.ac.za/dataportal/index.php/api/catalog/mwi-alpha-him-karonga-2002-2017-v1
+    status: 200
+    excerpt: '"doi": "https://doi.org/10.25828/wcty-q497"'
+  member_id: dafi
+  prefixes:
+  - '10.25828'
+  - '10.25375'
+  repository_clients:
+  - id: dafi.client
+    note: DataFirst / institutional minting — x-operator institution
+  - id: figshare.uct
+    note: ZivaHub minting through the Figshare tenancy — x-operator tenant. The DOIs are UCT's; the minting
+      platform is Figshare's.
+not_evidenced:
+- standard: scim
+  reason: no public SCIM endpoint or published SCIM support found on uct.ac.za
+- standard: lti
+  reason: UCT runs Amathuba (D2L Brightspace) and legacy Vula (Sakai); both support LTI, but no UCT-published
+    LTI registration or tool configuration was reachable without authentication. Vendor-operated in any
+    case.
+- standard: oneroster
+  reason: no evidence found
+- standard: ed-fi
+  reason: not applicable — Ed-Fi is a US K-12 standard
+- standard: caliper
+  reason: no evidence found
+- standard: qti
+  reason: no evidence found
+- standard: shibboleth
+  reason: UCT federates with SimpleSAMLphp, not the Shibboleth IdP. Recorded under `saml` instead — claiming
+    shibboleth here would be false.
+- standard: orcid
+  reason: ORCID appears in UCT research-support guidance but no UCT-operated ORCID member API integration
+    or public ORCID endpoint was confirmed by probe.
+- standard: crossref
+  reason: UCT mints through DataCite (member DAFI), not Crossref; no UCT Crossref member prefix confirmed.

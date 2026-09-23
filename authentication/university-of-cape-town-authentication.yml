@@ -1,0 +1,83 @@
+generated: '2026-08-30'
+method: probed
+source: >-
+  Live unauthenticated requests run 2026-08-30 against
+  www.datafirst.uct.ac.za, open.uct.ac.za and metadata.safire.ac.za.
+x-operator: institution
+description: >-
+  How each University of Cape Town surface authenticates callers. Every row was
+  established by an actual request, not by reading documentation.
+surfaces:
+  - name: DataFirst Microdata Catalog API (NADA)
+    x-operator: institution
+    base_url: https://www.datafirst.uct.ac.za/dataportal/index.php/api
+    scheme: none
+    public_read: true
+    api_key_required: false
+    signup_required: false
+    evidence:
+      - url: https://www.datafirst.uct.ac.za/dataportal/index.php/api/catalog?limit=2
+        status: 200
+        note: >-
+          Returned 582 studies with no credential of any kind, no cookie and no
+          Authorization header.
+    notes: >-
+      Catalog METADATA is fully open. The underlying microdata is not: studies
+      carry form_model / data_access_type values such as `licensed`, and
+      downloading those files requires a DataFirst account and an approved
+      access request through the web portal, which has no API. Some collection
+      endpoints are closed outright — GET /collections returns
+      {"status":"ACCESS-DENIED"} with HTTP 400.
+  - name: OpenUCT repository — OAI-PMH
+    x-operator: institution
+    base_url: https://open.uct.ac.za/server/oai/request
+    scheme: none
+    public_read: true
+    evidence:
+      - url: https://open.uct.ac.za/server/oai/request?verb=Identify
+        status: 200
+  - name: OpenUCT repository — DSpace REST API
+    x-operator: institution
+    base_url: https://open.uct.ac.za/server/api
+    scheme: none for public read; DSpace session token for anything else
+    public_read: true
+    evidence:
+      - url: https://open.uct.ac.za/server/api
+        status: 200
+        content_type: application/hal+json
+        note: 'dspaceVersion "DSpace 7.4"; advertises an authn endpoint at /server/api/authn'
+      - url: https://open.uct.ac.za/server/api/discover/search/objects?size=1
+        status: 200
+        note: discovery search returns results anonymously
+    notes: >-
+      The authentication contract here is DSpace's, not UCT-authored — UCT
+      operates the deployment. Write and workflow endpoints require a DSpace
+      login backed by UCT credentials.
+  - name: UCT identity provider (SAML 2.0)
+    x-operator: institution
+    entity_id: https://srvslsfed001.uct.ac.za/simplesaml/saml2/idp/metadata.php
+    scheme: SAML 2.0 web browser SSO
+    public_read: false
+    single_sign_on: https://idp.uct.ac.za/simplesaml/module.php/saml/idp/singleSignOnService
+    single_logout: https://idp.uct.ac.za/simplesaml/module.php/saml/idp/singleLogout
+    name_id_format: urn:oasis:names:tc:SAML:2.0:nameid-format:transient
+    evidence:
+      - url: https://metadata.safire.ac.za/safire-prod-idp.xml
+        status: 200
+    notes: >-
+      This is how humans and services authenticate INTO UCT systems. It is a
+      federation surface, not a REST API — there is no token endpoint an agent
+      can call.
+  - name: ZivaHub open data
+    x-operator: tenant
+    base_url: https://api.figshare.com/v2
+    scheme: none for public read; Figshare OAuth 2.0 / personal token for writes
+    evidence:
+      - url: https://zivahub.uct.ac.za/
+        status: 202
+        note: >-
+          Empty 202 from the Figshare edge — a bot challenge, not a dead host.
+          zivahub.uct.ac.za CNAMEs to figshare.com.
+    notes: >-
+      The authentication contract belongs to Figshare and is scored against
+      Figshare's own repo, not UCT's.

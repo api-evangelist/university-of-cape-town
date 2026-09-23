@@ -1,55 +1,92 @@
+# x-provenance:
+#   generated: '2026-08-30'
+#   method: derived
+#   source: >-
+#     openapi/_original/university-of-cape-town-datafirst-nada.yaml (probed 2026-08-30);
+#     https://open.uct.ac.za/server/oai/request?verb=Identify (probed 2026-08-30)
+#   x-operator: institution
+#   note: >-
+#     Figshare-derived terms (Article, Collection, Project, defined_type_name,
+#     timeline) were REMOVED on 2026-08-30. They described Figshare's contract,
+#     not UCT's — see the tenant entry for ZivaHub in apis.yml.
 vocabulary:
   name: University of Cape Town API Vocabulary
   description: >-
-    Shared terms used across the University of Cape Town public research-data
-    APIs: the DataFirst NADA microdata catalog, the OpenUCT DSpace OAI-PMH
-    repository, and the ZivaHub (Figshare) open data repository.
-  version: '1.0.0'
+    Terms used across the surfaces the University of Cape Town itself operates:
+    the DataFirst NADA microdata catalog API on www.datafirst.uct.ac.za, and the
+    OpenUCT DSpace repository (OAI-PMH and REST) on open.uct.ac.za. Terms
+    belonging to vendor contracts UCT merely consumes — the Figshare API behind
+    the ZivaHub tenancy — are deliberately not defined here.
+  version: '2.0.0'
   terms:
-    - term: Article
-      definition: >-
-        A public research output in ZivaHub (Figshare), such as a dataset,
-        thesis, software, figure, or report, identified by a numeric id and DOI.
-      tags: [zivahub, figshare, research-output]
-    - term: Collection
-      definition: A curated grouping of related ZivaHub articles, with its own DOI and handle.
-      tags: [zivahub, figshare]
-    - term: Project
-      definition: A ZivaHub container that organizes articles and collaborators.
-      tags: [zivahub, figshare]
     - term: Study
       definition: >-
         A survey or administrative microdata dataset cataloged in the DataFirst
         NADA portal, described by metadata including country and time coverage.
       tags: [datafirst, nada, microdata, survey]
-    - term: DOI
-      definition: A Digital Object Identifier providing a persistent reference to a research output.
-      tags: [identifier, persistent]
-    - term: Handle
-      definition: A Handle System persistent identifier assigned to a repository item.
-      tags: [identifier, persistent]
     - term: idno
-      definition: The persistent study identifier used by the DataFirst NADA catalog.
+      definition: >-
+        The persistent study identifier used by the DataFirst NADA catalog, and
+        the only key that addresses a study on /catalog/{idno} — a numeric id
+        returns 400 IDNO-NOT-FOUND.
       tags: [datafirst, nada, identifier]
+    - term: DataFile
+      definition: >-
+        One data file belonging to a DataFirst study, keyed by file id (F1, F3,
+        F4 …) and carrying case and variable counts.
+      tags: [datafirst, nada, microdata]
+    - term: Variable
+      definition: >-
+        A single measured variable inside a DataFirst data file, identified by
+        file id plus variable id and carrying a name and a label.
+      tags: [datafirst, nada, microdata]
     - term: form_model
       definition: >-
         The access model for a DataFirst study (for example licensed or open),
         governing how the underlying microdata may be obtained.
       tags: [datafirst, access, licensing]
+    - term: repositoryid
+      definition: >-
+        The code of the owning collection inside the DataFirst catalog (for
+        example ALPHA for the ALPHA Network).
+      tags: [datafirst, nada, collection]
     - term: OAI-PMH
       definition: >-
-        The Open Archives Initiative Protocol for Metadata Harvesting, exposed
-        by OpenUCT for harvesting repository metadata via verbs such as
-        Identify, ListRecords, and ListMetadataFormats.
-      tags: [openuct, dspace, metadata-harvesting]
-    - term: defined_type_name
+        The Open Archives Initiative Protocol for Metadata Harvesting, version
+        2.0, exposed by OpenUCT at /server/oai/request with verbs Identify,
+        ListMetadataFormats, ListSets and ListRecords.
+      tags: [openuct, dspace, metadata-harvesting, standard]
+    - term: Item
       definition: >-
-        The human-readable item type of a ZivaHub article (for example dataset,
-        thesis, software, poster, report).
-      tags: [zivahub, figshare, classification]
-    - term: timeline
-      definition: The set of publishing dates (posted, first online, revision) for a repository item.
-      tags: [zivahub, figshare, dates]
+        A deposited object in the OpenUCT DSpace repository — a thesis,
+        dissertation, article, report or open educational resource.
+      tags: [openuct, dspace, repository]
+    - term: Handle
+      definition: >-
+        A Handle System persistent identifier assigned to an OpenUCT item, under
+        UCT's 11427 prefix (oai:open.uct.ac.za:11427/…).
+      tags: [openuct, identifier, persistent]
+    - term: DOI
+      definition: >-
+        A Digital Object Identifier providing a persistent reference to a
+        research output. UCT is a DataCite direct member (provider symbol DAFI)
+        and mints under prefixes including 10.25828 (DataFirst) and 10.25375.
+      tags: [identifier, persistent, datacite]
+    - term: ROR
+      definition: >-
+        The Research Organization Registry identifier for the institution,
+        https://ror.org/03p74gp79.
+      tags: [identifier, organization]
+    - term: entityID
+      definition: >-
+        The SAML 2.0 identifier of UCT's identity provider in the South African
+        Identity Federation (SAFIRE), exported to eduGAIN.
+      tags: [identity, saml, safire, edugain]
+    - term: schacHomeOrganization
+      definition: >-
+        The SCHAC attribute asserting the home organization of a UCT identity —
+        uct.ac.za — carried in SAFIRE metadata.
+      tags: [identity, saml, attribute]
     - term: ORCID
       definition: An Open Researcher and Contributor ID identifying an author.
       tags: [author, identifier]

@@ -1,8 +1,8 @@
 {
   "opencollection": "1.0.0",
   "info": {
-    "name": "DataFirst Microdata API (NADA) articles catalog API",
-    "version": "1.0"
+    "name": "DataFirst Microdata API (NADA) Catalog API",
+    "version": "1.1"
   },
   "items": [
     {
@@ -34,7 +34,7 @@
               }
             ]
           },
-          "docs": "Returns a paginated list of catalog entries (surveys / studies) with summary metadata. Confirmed to return hundreds of surveys in JSON."
+          "docs": "Returns a paginated list of catalog entries (surveys / studies) with summary metadata. Confirmed on 2026-08-30 returning 582 surveys."
         },
         {
           "info": {
@@ -65,10 +65,66 @@
               }
             ]
           },
-          "docs": "Search the catalog of studies. Confirmed to return the same structured catalog response as the catalog listing endpoint."
+          "docs": "Search the catalog of studies by free-text keyword. Confirmed to return the same structured catalog response as the catalog listing endpoint, with the applied filters echoed back."
+        },
+        {
+          "info": {
+            "name": "Get one study by persistent identifier",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.datafirst.uct.ac.za/dataportal/index.php/api/catalog/{idno}",
+            "params": [
+              {
+                "name": "idno",
+                "value": "mwi-alpha-him-karonga-2002-2017-v1",
+                "type": "path",
+                "description": "Persistent study identifier (IDNO)."
+              }
+            ]
+          },
+          "docs": "Returns the full record for a single study, addressed by its persistent IDNO (not its numeric id \u2014 a numeric id returns 400 IDNO-NOT-FOUND). The response carries a `dataset` object plus a nested `metadata` block holding the study's DDI-style documentation."
+        },
+        {
+          "info": {
+            "name": "List the data files of a study",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.datafirst.uct.ac.za/dataportal/index.php/api/catalog/data_files/{idno}",
+            "params": [
+              {
+                "name": "idno",
+                "value": "mwi-alpha-him-karonga-2002-2017-v1",
+                "type": "path",
+                "description": "Persistent study identifier (IDNO)."
+              }
+            ]
+          },
+          "docs": "Returns the study's data files keyed by file id (F1, F3, F4 \u2026), each with case and variable counts."
+        },
+        {
+          "info": {
+            "name": "List the variables of a study",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.datafirst.uct.ac.za/dataportal/index.php/api/catalog/variables/{idno}",
+            "params": [
+              {
+                "name": "idno",
+                "value": "mwi-alpha-him-karonga-2002-2017-v1",
+                "type": "path",
+                "description": "Persistent study identifier (IDNO)."
+              }
+            ]
+          },
+          "docs": "Returns the study's variables with their file id, variable id, name and label, plus a total count."
         }
       ]
     }
-  ],
-  "bundled": true
+  ]
 }

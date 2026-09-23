@@ -1,3 +1,9 @@
+# x-provenance:
+#   generated: '2026-08-30'
+#   method: derived
+#   source: openapi/_original/university-of-cape-town-datafirst-nada.yaml
+#   x-operator: institution
+#   note: Figshare schema names (Article/Collection/Project) removed 2026-08-30.
 formats: [oas3]
 rules:
   uct-info-contact:
@@ -44,9 +50,9 @@ rules:
       field: tags
       function: truthy
   uct-resource-has-id:
-    description: Catalog and repository objects expose a stable integer id.
+    description: DataFirst catalog objects expose a stable integer id.
     severity: warn
-    given: $.components.schemas[?(@property.match(/Article$|Study$|Collection$|Project$/))].properties
+    given: $.components.schemas[?(@property.match(/Study$|StudyDetail$|DataFile$|Variable$/))].properties
     then:
       field: id
       function: truthy

@@ -1,0 +1,63 @@
+generated: '2026-08-30'
+method: probed
+source: >-
+  Error responses observed 2026-08-30 against
+  https://www.datafirst.uct.ac.za/dataportal/index.php/api
+x-operator: institution
+description: >-
+  The error contract of the DataFirst NADA catalog API, established by
+  deliberately malformed and unauthorized requests. Recorded because it is
+  non-obvious: the service does NOT use 404, and it answers an authorization
+  failure with a 400.
+api: DataFirst Microdata Catalog API (NADA)
+format: JSON envelope with `status` and `message` string fields.
+no_problem_details: true
+notes: >-
+  RFC 9457 / RFC 7807 application/problem+json is NOT used. Content-Type on
+  error responses is application/json.
+errors:
+  - http_status: 400
+    status: failed
+    message: IDNO-NOT-FOUND
+    meaning: >-
+      The study identifier does not resolve. Also returned when a NUMERIC id is
+      passed where the persistent IDNO is required — /catalog/890 fails while
+      /catalog/mwi-alpha-him-karonga-2002-2017-v1 succeeds.
+    evidence:
+      - url: https://www.datafirst.uct.ac.za/dataportal/index.php/api/catalog/890
+        status: 400
+        body: '{"status":"failed","message":"IDNO-NOT-FOUND"}'
+      - url: https://www.datafirst.uct.ac.za/dataportal/index.php/api/catalog/data_files/890
+        status: 400
+        body: '{"status":"failed","message":"IDNO-NOT-FOUND"}'
+  - http_status: 400
+    status: ACCESS-DENIED
+    message: Access denied
+    meaning: The endpoint exists but is not open to anonymous callers.
+    evidence:
+      - url: https://www.datafirst.uct.ac.za/dataportal/index.php/api/collections
+        status: 400
+        body: '{"status":"ACCESS-DENIED","message":"Access denied"}'
+  - http_status: 500
+    status: null
+    message: null
+    meaning: >-
+      Empty-bodied server error on endpoints the deployment does not implement.
+      No envelope is returned at all.
+    evidence:
+      - url: https://www.datafirst.uct.ac.za/dataportal/index.php/api/tables
+        status: 500
+        body: ''
+      - url: https://www.datafirst.uct.ac.za/dataportal/index.php/api/citations
+        status: 500
+        body: ''
+  - http_status: 404
+    status: null
+    message: null
+    meaning: >-
+      The API ROOT itself 404s with an HTML page; only /catalog and its
+      sub-paths are routed.
+    evidence:
+      - url: https://www.datafirst.uct.ac.za/dataportal/index.php/api
+        status: 404
+        content_type: text/html

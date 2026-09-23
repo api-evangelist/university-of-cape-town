@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/university-of-cape-town/main/json-schema/university-of-cape-town-variable-schema.json",
+  "title": "DataFirst Study Variable",
+  "description": "A single measured variable inside a DataFirst study data file, as returned by GET /catalog/variables/{idno}. Field set observed live on 2026-08-30.",
+  "type": "object",
+  "required": ["uid", "sid", "fid", "vid", "name"],
+  "properties": {
+    "uid": { "type": "integer", "description": "Globally unique variable identifier.", "examples": [1736429] },
+    "sid": { "type": "integer", "description": "Internal id of the owning study.", "examples": [890] },
+    "fid": { "type": "string", "description": "File id the variable belongs to.", "examples": ["F3"] },
+    "vid": { "type": "string", "description": "Variable id within the file.", "examples": ["V21"] },
+    "name": { "type": "string", "description": "Variable name as stored in the data file.", "examples": ["sex"] },
+    "labl": { "type": ["string", "null"], "description": "Human-readable variable label.", "examples": ["Sex"] }
+  },
+  "additionalProperties": true
+}

@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/university-of-cape-town/main/json-schema/university-of-cape-town-datafile-schema.json",
+  "title": "DataFirst Study Data File",
+  "description": "One data file belonging to a study in the DataFirst NADA microdata catalog, as returned by GET /catalog/data_files/{idno}. Field set observed live on 2026-08-30.",
+  "type": "object",
+  "required": ["id", "sid", "file_id", "file_name"],
+  "properties": {
+    "id": { "type": "integer", "description": "Internal data file identifier.", "examples": [7911] },
+    "sid": { "type": "integer", "description": "Internal id of the owning study.", "examples": [890] },
+    "file_id": { "type": "string", "description": "File id within the study (F1, F3, F4 ...).", "examples": ["F3"] },
+    "file_name": { "type": "string", "description": "Name of the data file.", "examples": ["incidence_Karonga"] },
+    "description": { "type": ["string", "null"], "description": "Free-text description of the file." },
+    "case_count": { "type": ["integer", "null"], "description": "Number of cases (rows) in the file.", "examples": [25136] },
+    "var_count": { "type": ["integer", "null"], "description": "Number of variables (columns) in the file.", "examples": [12] },
+    "producer": { "type": ["string", "null"] },
+    "data_checks": { "type": ["string", "null"] },
+    "missing_data": { "type": ["string", "null"] },
+    "version": { "type": ["string", "null"] },
+    "notes": { "type": ["string", "null"] },
+    "metadata": { "type": ["object", "null"], "description": "Nested DDI file description, when present." }
+  },
+  "additionalProperties": true
+}

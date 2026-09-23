@@ -1,0 +1,19 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://www.datafirst.uct.ac.za/dataportal/index.php/api/catalog/variables/mwi-alpha-him-karonga-2002-2017-v1"
+  },
+  "response": {
+    "total": 25,
+    "variables": [
+      { "uid": 1736429, "sid": 890, "fid": "F3", "vid": "V21", "name": "sex", "labl": "Sex" },
+      { "uid": 1736430, "sid": 890, "fid": "F3", "vid": "V22", "name": "idno", "labl": "Participant ID number" },
+      { "uid": 1736431, "sid": 890, "fid": "F3", "vid": "V23", "name": "study_name", "labl": "Study name" }
+    ]
+  },
+  "x-provenance": {
+    "generated": "2026-08-30",
+    "method": "probed",
+    "source": "https://www.datafirst.uct.ac.za/dataportal/index.php/api/catalog/variables/mwi-alpha-him-karonga-2002-2017-v1"
+  }
+}

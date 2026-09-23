@@ -1,19 +1,31 @@
+# x-provenance:
+#   generated: '2026-08-30'
+#   method: probed
+#   source: https://www.datafirst.uct.ac.za/dataportal/index.php/api/
+#   x-operator: institution
+#   note: >-
+#     Reverse-engineered ONLY from live responses observed against the DataFirst
+#     NADA catalog host on 2026-08-30. Every path, parameter and response field
+#     below was returned by a real request. Nothing is inferred from NADA's
+#     upstream documentation.
 openapi: 3.0.3
 info:
   title: DataFirst Microdata Catalog API (NADA)
   description: >-
     DataFirst is a University of Cape Town research unit and data service
     providing online access to survey and administrative microdata from South
-    Africa and other African countries. Its open data portal is built on the
-    NADA (National Data Archive) cataloging tool, which exposes a public,
-    unauthenticated REST/JSON API for browsing the catalog of studies. This
-    OpenAPI description was reverse-engineered from confirmed live responses of
-    the public catalog endpoint (verified returning survey metadata in JSON).
-    Only paths and response fields actually observed in live responses are
-    documented here.
-  version: '1.0'
+    Africa and other African countries. Its open data portal runs the NADA
+    (National Data Archive) cataloging application on UCT's own host,
+    www.datafirst.uct.ac.za, and exposes a public, unauthenticated REST/JSON
+    API over the catalog. This OpenAPI description was reverse-engineered from
+    confirmed live responses on 2026-08-30 (582 studies returned by the catalog
+    endpoint). Only paths and response fields actually observed in live
+    responses are documented here. The service is operated by UCT; the NADA
+    application itself is open-source software from the International Household
+    Survey Network.
+  version: '1.1'
   contact:
-    name: DataFirst
+    name: DataFirst, University of Cape Town
     url: https://www.datafirst.uct.ac.za/
 servers:
   - url: https://www.datafirst.uct.ac.za/dataportal/index.php/api
@@ -28,7 +40,7 @@ paths:
       summary: List catalog studies
       description: >-
         Returns a paginated list of catalog entries (surveys / studies) with
-        summary metadata. Confirmed to return hundreds of surveys in JSON.
+        summary metadata. Confirmed on 2026-08-30 returning 582 surveys.
       operationId: listCatalog
       parameters:
         - $ref: '#/components/parameters/limit'
@@ -45,8 +57,9 @@ paths:
       tags: [catalog]
       summary: Search catalog studies
       description: >-
-        Search the catalog of studies. Confirmed to return the same structured
-        catalog response as the catalog listing endpoint.
+        Search the catalog of studies by free-text keyword. Confirmed to return
+        the same structured catalog response as the catalog listing endpoint,
+        with the applied filters echoed back.
       operationId: searchCatalog
       parameters:
         - name: sk
@@ -63,6 +76,77 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CatalogResponse'
+  /catalog/{idno}:
+    get:
+      tags: [catalog]
+      summary: Get one study by persistent identifier
+      description: >-
+        Returns the full record for a single study, addressed by its persistent
+        IDNO (not its numeric id — a numeric id returns 400 IDNO-NOT-FOUND).
+        The response carries a `dataset` object plus a nested `metadata` block
+        holding the study's DDI-style documentation.
+      operationId: getStudy
+      parameters:
+        - $ref: '#/components/parameters/idno'
+      responses:
+        '200':
+          description: The study record.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StudyResponse'
+        '400':
+          description: Unknown or malformed IDNO.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /catalog/data_files/{idno}:
+    get:
+      tags: [catalog]
+      summary: List the data files of a study
+      description: >-
+        Returns the study's data files keyed by file id (F1, F3, F4 …), each
+        with case and variable counts.
+      operationId: listStudyDataFiles
+      parameters:
+        - $ref: '#/components/parameters/idno'
+      responses:
+        '200':
+          description: The study's data files.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataFilesResponse'
+        '400':
+          description: Unknown or malformed IDNO.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /catalog/variables/{idno}:
+    get:
+      tags: [catalog]
+      summary: List the variables of a study
+      description: >-
+        Returns the study's variables with their file id, variable id, name and
+        label, plus a total count.
+      operationId: listStudyVariables
+      parameters:
+        - $ref: '#/components/parameters/idno'
+      responses:
+        '200':
+          description: The study's variables.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VariablesResponse'
+        '400':
+          description: Unknown or malformed IDNO.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
 components:
   parameters:
     limit:
@@ -81,7 +165,27 @@ components:
         type: integer
         minimum: 0
         default: 0
+    idno:
+      name: idno
+      in: path
+      required: true
+      description: Persistent study identifier (IDNO).
+      schema:
+        type: string
+      example: mwi-alpha-him-karonga-2002-2017-v1
   schemas:
+    Error:
+      type: object
+      description: >-
+        Error envelope observed on 2026-08-30. Note that the service returns
+        HTTP 400 for a not-found study, not 404.
+      properties:
+        status:
+          type: string
+          example: failed
+        message:
+          type: string
+          example: IDNO-NOT-FOUND
     CatalogResponse:
       type: object
       properties:
@@ -93,11 +197,11 @@ components:
         found:
           type: integer
           description: Number of matching studies.
-          example: 573
+          example: 582
         total:
           type: integer
           description: Total number of studies in the catalog.
-          example: 573
+          example: 582
         limit:
           type: integer
           example: 15
@@ -110,31 +214,195 @@ components:
           additionalProperties:
             type: integer
           example:
-            survey: 573
+            survey: 582
+            timeseries: 0
         rows:
           type: array
           items:
             $ref: '#/components/schemas/Study'
-    Study:
+    StudyResponse:
       type: object
-      description: A single catalog study (survey).
+      properties:
+        status:
+          type: string
+          example: success
+        dataset:
+          $ref: '#/components/schemas/StudyDetail'
+    StudyDetail:
+      type: object
+      description: Full record for one study.
       properties:
         id:
           type: integer
-          description: Internal study identifier.
           example: 890
+        doi:
+          type: string
+          nullable: true
+          example: https://doi.org/10.25828/wcty-q497
+        repositoryid:
+          type: string
+          description: Owning collection / repository code.
+          example: ALPHA
         type:
           type: string
-          description: Study type.
           example: survey
         idno:
           type: string
-          description: Persistent study identifier.
+          example: mwi-alpha-him-karonga-2002-2017-v1
+        title:
+          type: string
+          example: ALPHA HIV Incidence and Mortality Data
+        year_start:
+          type: integer
+          example: 2002
+        year_end:
+          type: integer
+          example: 2017
+        nation:
+          type: string
+          example: Malawi
+        authoring_entity:
+          type: string
+        published:
+          type: integer
+          example: 1
+        created:
+          type: string
+          example: '2022-01-19T12:59:56+00:00'
+        changed:
+          type: string
+          example: '2024-08-23T09:59:07+00:00'
+        varcount:
+          type: integer
+          example: 25
+        total_views:
+          type: integer
+        total_downloads:
+          type: integer
+        formid:
+          type: integer
+        data_access_type:
+          type: string
+          example: licensed
+        remote_data_url:
+          type: string
+          nullable: true
+        data_class_id:
+          type: integer
+          nullable: true
+        data_class_code:
+          type: string
+          nullable: true
+        data_class_title:
+          type: string
+          nullable: true
+        thumbnail:
+          type: string
+        metadata:
+          type: object
+          description: >-
+            Nested DDI-style study documentation (study description, producers,
+            coverage, access conditions). Shape varies by study.
+          additionalProperties: true
+    DataFilesResponse:
+      type: object
+      properties:
+        datafiles:
+          type: object
+          description: Data files keyed by file id (F1, F3, F4 …).
+          additionalProperties:
+            $ref: '#/components/schemas/DataFile'
+    DataFile:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 7911
+        sid:
+          type: integer
+          description: Internal study id.
+          example: 890
+        file_id:
+          type: string
+          example: F3
+        file_name:
+          type: string
+          example: incidence_Karonga
+        description:
+          type: string
+          nullable: true
+        case_count:
+          type: integer
+          example: 25136
+        var_count:
+          type: integer
+          example: 12
+        producer:
+          type: string
+          nullable: true
+        data_checks:
+          type: string
+          nullable: true
+        missing_data:
+          type: string
+          nullable: true
+        version:
+          type: string
+          nullable: true
+        notes:
+          type: string
+          nullable: true
+    VariablesResponse:
+      type: object
+      properties:
+        total:
+          type: integer
+          example: 25
+        variables:
+          type: array
+          items:
+            $ref: '#/components/schemas/Variable'
+    Variable:
+      type: object
+      properties:
+        uid:
+          type: integer
+          example: 1736429
+        sid:
+          type: integer
+          example: 890
+        fid:
+          type: string
+          description: File id the variable belongs to.
+          example: F3
+        vid:
+          type: string
+          description: Variable id within the file.
+          example: V21
+        name:
+          type: string
+          example: sex
+        labl:
+          type: string
+          description: Variable label.
+          example: Sex
+    Study:
+      type: object
+      description: A single catalog study (survey) as returned in a listing.
+      properties:
+        id:
+          type: integer
+          example: 890
+        type:
+          type: string
+          example: survey
+        idno:
+          type: string
           example: mwi-alpha-him-karonga-2002-2017-v1
         doi:
           type: string
           nullable: true
-          description: DOI for the study, if assigned.
+          example: https://doi.org/10.25828/wcty-q497
         title:
           type: string
           example: ALPHA HIV Incidence and Mortality Data
@@ -143,14 +411,11 @@ components:
           example: Karonga 2002-2017
         nation:
           type: string
-          description: Country the study covers.
           example: Malawi
         authoring_entity:
           type: string
-          description: Producing institution(s).
         form_model:
           type: string
-          description: Access model for the data.
           example: licensed
         data_class_id:
           type: integer
@@ -161,6 +426,24 @@ components:
         year_end:
           type: integer
           example: 2017
+        repositoryid:
+          type: string
+          example: ALPHA
+        repo_title:
+          type: string
+          example: ALPHA Network
+        created:
+          type: string
+        changed:
+          type: string
+        total_views:
+          type: integer
+        total_downloads:
+          type: integer
+        varcount:
+          type: integer
         thumbnail:
           type: string
-          description: Thumbnail image path or URL.
+        url:
+          type: string
+          description: Public HTML landing page for the study.
