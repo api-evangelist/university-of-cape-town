@@ -120,94 +120,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    DataFile:
-      type: object
-      properties:
-        id:
-          type: integer
-          example: 7911
-        sid:
-          type: integer
-          description: Internal study id.
-          example: 890
-        file_id:
-          type: string
-          example: F3
-        file_name:
-          type: string
-          example: incidence_Karonga
-        description:
-          type:
-          - string
-          - 'null'
-        case_count:
-          type: integer
-          example: 25136
-        var_count:
-          type: integer
-          example: 12
-        producer:
-          type:
-          - string
-          - 'null'
-        data_checks:
-          type:
-          - string
-          - 'null'
-        missing_data:
-          type:
-          - string
-          - 'null'
-        version:
-          type:
-          - string
-          - 'null'
-        notes:
-          type:
-          - string
-          - 'null'
-    DataFilesResponse:
-      type: object
-      properties:
-        datafiles:
-          type: object
-          description: Data files keyed by file id (F1, F3, F4 …).
-          additionalProperties:
-            $ref: '#/components/schemas/DataFile'
-    CatalogResult:
-      type: object
-      properties:
-        found:
-          type: integer
-          description: Number of matching studies.
-          example: 582
-        total:
-          type: integer
-          description: Total number of studies in the catalog.
-          example: 582
-        limit:
-          type: integer
-          example: 15
-        offset:
-          type: integer
-          example: 0
-        search_counts_by_type:
-          type: object
-          description: Counts of results grouped by study type.
-          additionalProperties:
-            type: integer
-          example:
-            survey: 582
-            timeseries: 0
-        rows:
-          type: array
-          items:
-            $ref: '#/components/schemas/Study'
-    CatalogResponse:
-      type: object
-      properties:
-        result:
-          $ref: '#/components/schemas/CatalogResult'
     StudyDetail:
       type: object
       description: Full record for one study.
@@ -287,40 +199,89 @@ components:
           type: object
           description: Nested DDI-style study documentation (study description, producers, coverage, access conditions). Shape varies by study.
           additionalProperties: true
-    Variable:
+    CatalogResult:
       type: object
       properties:
-        uid:
+        found:
           type: integer
-          example: 1736429
+          description: Number of matching studies.
+          example: 582
+        total:
+          type: integer
+          description: Total number of studies in the catalog.
+          example: 582
+        limit:
+          type: integer
+          example: 15
+        offset:
+          type: integer
+          example: 0
+        search_counts_by_type:
+          type: object
+          description: Counts of results grouped by study type.
+          additionalProperties:
+            type: integer
+          example:
+            survey: 582
+            timeseries: 0
+        rows:
+          type: array
+          items:
+            $ref: '#/components/schemas/Study'
+    DataFilesResponse:
+      type: object
+      properties:
+        datafiles:
+          type: object
+          description: Data files keyed by file id (F1, F3, F4 …).
+          additionalProperties:
+            $ref: '#/components/schemas/DataFile'
+    DataFile:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 7911
         sid:
           type: integer
+          description: Internal study id.
           example: 890
-        fid:
+        file_id:
           type: string
-          description: File id the variable belongs to.
           example: F3
-        vid:
+        file_name:
           type: string
-          description: Variable id within the file.
-          example: V21
-        name:
-          type: string
-          example: sex
-        labl:
-          type: string
-          description: Variable label.
-          example: Sex
-    Error:
-      type: object
-      description: Error envelope observed on 2026-08-30. Note that the service returns HTTP 400 for a not-found study, not 404.
-      properties:
-        status:
-          type: string
-          example: failed
-        message:
-          type: string
-          example: IDNO-NOT-FOUND
+          example: incidence_Karonga
+        description:
+          type:
+          - string
+          - 'null'
+        case_count:
+          type: integer
+          example: 25136
+        var_count:
+          type: integer
+          example: 12
+        producer:
+          type:
+          - string
+          - 'null'
+        data_checks:
+          type:
+          - string
+          - 'null'
+        missing_data:
+          type:
+          - string
+          - 'null'
+        version:
+          type:
+          - string
+          - 'null'
+        notes:
+          type:
+          - string
+          - 'null'
     VariablesResponse:
       type: object
       properties:
@@ -402,15 +363,46 @@ components:
           example: success
         dataset:
           $ref: '#/components/schemas/StudyDetail'
+    Variable:
+      type: object
+      properties:
+        uid:
+          type: integer
+          example: 1736429
+        sid:
+          type: integer
+          example: 890
+        fid:
+          type: string
+          description: File id the variable belongs to.
+          example: F3
+        vid:
+          type: string
+          description: Variable id within the file.
+          example: V21
+        name:
+          type: string
+          example: sex
+        labl:
+          type: string
+          description: Variable label.
+          example: Sex
+    CatalogResponse:
+      type: object
+      properties:
+        result:
+          $ref: '#/components/schemas/CatalogResult'
+    Error:
+      type: object
+      description: Error envelope observed on 2026-08-30. Note that the service returns HTTP 400 for a not-found study, not 404.
+      properties:
+        status:
+          type: string
+          example: failed
+        message:
+          type: string
+          example: IDNO-NOT-FOUND
   parameters:
-    limit:
-      name: limit
-      in: query
-      description: Maximum number of rows per page.
-      schema:
-        type: integer
-        minimum: 1
-        default: 15
     idno:
       name: idno
       in: path
@@ -419,6 +411,14 @@ components:
       schema:
         type: string
       example: mwi-alpha-him-karonga-2002-2017-v1
+    limit:
+      name: limit
+      in: query
+      description: Maximum number of rows per page.
+      schema:
+        type: integer
+        minimum: 1
+        default: 15
     offset:
       name: offset
       in: query
